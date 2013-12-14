@@ -1,5 +1,5 @@
 //
-//  IAMatch.h
+//  SCMatch.h
 //  MatchmakingSDK
 //
 //  Created by Adam Roth on 27/03/12.
@@ -16,12 +16,12 @@
 #import "DataReaderDelegate.h"
 #import "DataWriterDelegate.h"
 
-@class IAMatchmaker;
+@class SCMatchmaker;
 
-@interface IAMatch : NSObject<DataReaderDelegate, DataWriterDelegate> {
+@interface SCMatch : NSObject<DataReaderDelegate, DataWriterDelegate> {
     //private fields
     NSMutableDictionary* playerDetails;
-    IAMatchmaker* matchmaker;
+    SCMatchmaker* matchmaker;
     
     NSMutableDictionary* dataWriters;
     NSMutableArray* dataReaders;
@@ -47,10 +47,10 @@
 - (void) setPassword:(NSString*)password;
 
 //constructors (protected)
-- (id) initWithPlayerId:(NSString*)myId andMatchmaker:(IAMatchmaker*)maker;
-- (id) initWithPlayerId:(NSString*)myId andMatchmaker:(IAMatchmaker*)maker andPassword:(NSString*)pass;
-- (id) initWithPlayerId:(NSString*)myId andMatchmaker:(IAMatchmaker*)maker andMatchId:(NSString*)match;
-- (id) initWithPlayerId:(NSString*)myId andMatchmaker:(IAMatchmaker*)maker andMatchId:(NSString*)match andPassword:(NSString*)pass;
+- (id) initWithPlayerId:(NSString*)myId andMatchmaker:(SCMatchmaker*)maker;
+- (id) initWithPlayerId:(NSString*)myId andMatchmaker:(SCMatchmaker*)maker andPassword:(NSString*)pass;
+- (id) initWithPlayerId:(NSString*)myId andMatchmaker:(SCMatchmaker*)maker andMatchId:(NSString*)match;
+- (id) initWithPlayerId:(NSString*)myId andMatchmaker:(SCMatchmaker*)maker andMatchId:(NSString*)match andPassword:(NSString*)pass;
 
 
 //public API

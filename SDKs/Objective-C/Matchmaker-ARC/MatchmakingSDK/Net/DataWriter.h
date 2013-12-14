@@ -9,18 +9,18 @@
 #import <Foundation/Foundation.h>
 #import "DataWriterDelegate.h"
 
-@class IAMatchmaker;
+@class SCMatchmaker;
 
 @interface DataWriter : NSObject {
     //private
-    IAMatchmaker* matchmaker;
+    SCMatchmaker* matchmaker;
     CFWriteStreamRef output;
     NSMutableArray* sendBuffer;
     NSString* playerId;
     BOOL open;
 }
 
-- (id) initWithMatchmaker:(IAMatchmaker*)maker andOutput:(CFWriteStreamRef)outData andDelegate:(NSObject<DataWriterDelegate>*)del forPlayer:(NSString*)player;
+- (id) initWithMatchmaker:(SCMatchmaker*)maker andOutput:(CFWriteStreamRef)outData andDelegate:(NSObject<DataWriterDelegate>*)del forPlayer:(NSString*)player;
 
 - (void) close;
 - (void) sendData:(NSDictionary*)jsonData;

@@ -9,17 +9,17 @@
 #import <Foundation/Foundation.h>
 #import "DataReaderDelegate.h"
 
-@class IAMatchmaker;
+@class SCMatchmaker;
 @class DataWriter;
 
 @interface DataReader : NSObject {
     //private
-    IAMatchmaker* matchmaker;
+    SCMatchmaker* matchmaker;
     CFReadStreamRef input;
     DataWriter* writer;
 }
 
-- (id) initWithMatchmaker:(IAMatchmaker*)maker andInput:(CFReadStreamRef)dataIn andDelegate:(NSObject<DataReaderDelegate>*)del andPairedWriter:(DataWriter*)writer;
+- (id) initWithMatchmaker:(SCMatchmaker*)maker andInput:(CFReadStreamRef)dataIn andDelegate:(NSObject<DataReaderDelegate>*)del andPairedWriter:(DataWriter*)writer;
 
 @property(strong) NSObject<DataReaderDelegate>* delegate;
 

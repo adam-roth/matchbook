@@ -9,11 +9,11 @@
 /* Begin PBXBuildFile section */
 		830FA413154FC98800708CCD /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 830FA412154FC98800708CCD /* Foundation.framework */; };
 		830FA419154FC98800708CCD /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 830FA417154FC98800708CCD /* InfoPlist.strings */; };
-		830FA43B154FC9CA00708CCD /* IAMatch.h in Headers */ = {isa = PBXBuildFile; fileRef = 830FA424154FC9CA00708CCD /* IAMatch.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		830FA43C154FC9CA00708CCD /* IAMatch.m in Sources */ = {isa = PBXBuildFile; fileRef = 830FA425154FC9CA00708CCD /* IAMatch.m */; };
-		830FA43D154FC9CA00708CCD /* IAMatchmaker.h in Headers */ = {isa = PBXBuildFile; fileRef = 830FA426154FC9CA00708CCD /* IAMatchmaker.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		830FA43E154FC9CA00708CCD /* IAMatchmaker.m in Sources */ = {isa = PBXBuildFile; fileRef = 830FA427154FC9CA00708CCD /* IAMatchmaker.m */; };
-		830FA43F154FC9CA00708CCD /* IAMatchmakerDelegate.h in Headers */ = {isa = PBXBuildFile; fileRef = 830FA428154FC9CA00708CCD /* IAMatchmakerDelegate.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		830FA43B154FC9CA00708CCD /* SCMatch.h in Headers */ = {isa = PBXBuildFile; fileRef = 830FA424154FC9CA00708CCD /* SCMatch.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		830FA43C154FC9CA00708CCD /* SCMatch.m in Sources */ = {isa = PBXBuildFile; fileRef = 830FA425154FC9CA00708CCD /* SCMatch.m */; };
+		830FA43D154FC9CA00708CCD /* SCMatchmaker.h in Headers */ = {isa = PBXBuildFile; fileRef = 830FA426154FC9CA00708CCD /* SCMatchmaker.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		830FA43E154FC9CA00708CCD /* SCMatchmaker.m in Sources */ = {isa = PBXBuildFile; fileRef = 830FA427154FC9CA00708CCD /* SCMatchmaker.m */; };
+		830FA43F154FC9CA00708CCD /* SCMatchmakerDelegate.h in Headers */ = {isa = PBXBuildFile; fileRef = 830FA428154FC9CA00708CCD /* SCMatchmakerDelegate.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		830FA440154FC9CA00708CCD /* MatchAPI.h in Headers */ = {isa = PBXBuildFile; fileRef = 830FA429154FC9CA00708CCD /* MatchAPI.h */; };
 		830FA441154FC9CA00708CCD /* MatchAPI.m in Sources */ = {isa = PBXBuildFile; fileRef = 830FA42A154FC9CA00708CCD /* MatchAPI.m */; };
 		830FA442154FC9CA00708CCD /* DataReader.h in Headers */ = {isa = PBXBuildFile; fileRef = 830FA42C154FC9CA00708CCD /* DataReader.h */; };
@@ -41,11 +41,11 @@
 		830FA416154FC98800708CCD /* MatchmakingSDK-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "MatchmakingSDK-Info.plist"; sourceTree = "<group>"; };
 		830FA418154FC98800708CCD /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		830FA41A154FC98800708CCD /* MatchmakingSDK-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "MatchmakingSDK-Prefix.pch"; sourceTree = "<group>"; };
-		830FA424154FC9CA00708CCD /* IAMatch.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IAMatch.h; sourceTree = "<group>"; };
-		830FA425154FC9CA00708CCD /* IAMatch.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IAMatch.m; sourceTree = "<group>"; };
-		830FA426154FC9CA00708CCD /* IAMatchmaker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IAMatchmaker.h; sourceTree = "<group>"; };
-		830FA427154FC9CA00708CCD /* IAMatchmaker.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IAMatchmaker.m; sourceTree = "<group>"; };
-		830FA428154FC9CA00708CCD /* IAMatchmakerDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IAMatchmakerDelegate.h; sourceTree = "<group>"; };
+		830FA424154FC9CA00708CCD /* SCMatch.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SCMatch.h; sourceTree = "<group>"; };
+		830FA425154FC9CA00708CCD /* SCMatch.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SCMatch.m; sourceTree = "<group>"; };
+		830FA426154FC9CA00708CCD /* SCMatchmaker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SCMatchmaker.h; sourceTree = "<group>"; };
+		830FA427154FC9CA00708CCD /* SCMatchmaker.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SCMatchmaker.m; sourceTree = "<group>"; };
+		830FA428154FC9CA00708CCD /* SCMatchmakerDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SCMatchmakerDelegate.h; sourceTree = "<group>"; };
 		830FA429154FC9CA00708CCD /* MatchAPI.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MatchAPI.h; sourceTree = "<group>"; };
 		830FA42A154FC9CA00708CCD /* MatchAPI.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MatchAPI.m; sourceTree = "<group>"; };
 		830FA42C154FC9CA00708CCD /* DataReader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DataReader.h; sourceTree = "<group>"; };
@@ -130,11 +130,11 @@
 		830FA423154FC9CA00708CCD /* API */ = {
 			isa = PBXGroup;
 			children = (
-				830FA424154FC9CA00708CCD /* IAMatch.h */,
-				830FA425154FC9CA00708CCD /* IAMatch.m */,
-				830FA426154FC9CA00708CCD /* IAMatchmaker.h */,
-				830FA427154FC9CA00708CCD /* IAMatchmaker.m */,
-				830FA428154FC9CA00708CCD /* IAMatchmakerDelegate.h */,
+				830FA424154FC9CA00708CCD /* SCMatch.h */,
+				830FA425154FC9CA00708CCD /* SCMatch.m */,
+				830FA426154FC9CA00708CCD /* SCMatchmaker.h */,
+				830FA427154FC9CA00708CCD /* SCMatchmaker.m */,
+				830FA428154FC9CA00708CCD /* SCMatchmakerDelegate.h */,
 				830FA429154FC9CA00708CCD /* MatchAPI.h */,
 				830FA42A154FC9CA00708CCD /* MatchAPI.m */,
 			);
@@ -178,9 +178,9 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				830FA43B154FC9CA00708CCD /* IAMatch.h in Headers */,
-				830FA43D154FC9CA00708CCD /* IAMatchmaker.h in Headers */,
-				830FA43F154FC9CA00708CCD /* IAMatchmakerDelegate.h in Headers */,
+				830FA43B154FC9CA00708CCD /* SCMatch.h in Headers */,
+				830FA43D154FC9CA00708CCD /* SCMatchmaker.h in Headers */,
+				830FA43F154FC9CA00708CCD /* SCMatchmakerDelegate.h in Headers */,
 				830FA440154FC9CA00708CCD /* MatchAPI.h in Headers */,
 				830FA442154FC9CA00708CCD /* DataReader.h in Headers */,
 				830FA444154FC9CA00708CCD /* DataUtils.h in Headers */,
@@ -302,8 +302,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				830FA43C154FC9CA00708CCD /* IAMatch.m in Sources */,
-				830FA43E154FC9CA00708CCD /* IAMatchmaker.m in Sources */,
+				830FA43C154FC9CA00708CCD /* SCMatch.m in Sources */,
+				830FA43E154FC9CA00708CCD /* SCMatchmaker.m in Sources */,
 				830FA441154FC9CA00708CCD /* MatchAPI.m in Sources */,
 				830FA443154FC9CA00708CCD /* DataReader.m in Sources */,
 				830FA445154FC9CA00708CCD /* DataUtils.m in Sources */,

@@ -1,13 +1,13 @@
 //
-//  IAMatchmaker.m
+//  SCMatchmaker.m
 //  MatchmakingSDK
 //
 //  Created by Adam Roth on 27/03/12.
 //  Copyright (c) 2012 __MyCompanyName__. All rights reserved.
 //
 
-#import "IAMatchmaker.h"
-#import "IAMatch.h"
+#import "SCMatchmaker.h"
+#import "SCMatch.h"
 #import <UIKit/UIKit.h>
 #import "MatchAPI.h"
 #import <SBJSON/SBJson.h>
@@ -15,13 +15,13 @@
 #import "DataUtils.h"
 #import "SocketBridge.h"
 #import "StringUtilities.h"
-#import "IAMatchmakerDelegate.h"
+#import "SCMatchmakerDelegate.h"
 
 #define SERVER_ROOT @"http://pokemunity.com:44444/ap/"
-#define UUID_PASTEBOARD_NAME @"au.net.iapps.matchmaker.uuid.v4"
+#define UUID_PASTEBOARD_NAME @"au.com.suncoastpc.matchmaker.uuid.v4"
 #define PING_INTERVAL 30.0
 
-@interface IAMatchmaker (Private)
+@interface SCMatchmaker (Private)
 
 - (NSDictionary*)callMethod:(ApiMethod)method withParams:(NSDictionary*)params;
 - (BOOL)didRequestSucceed:(NSDictionary*)response;
@@ -40,11 +40,11 @@
 - (NSDictionary*)joinMatchWithPassword:(NSString*)pass andOptions:(NSString*)gameOptions;
 - (NSDictionary*)listWaitingProxiesForMatch:(NSString*)matchId;
 - (NSDictionary*)requestProxiedConnectionForMatch:(NSString*)matchId;
-- (void) pingThreadEntry: (IAMatch*)match;
+- (void) pingThreadEntry: (SCMatch*)match;
 
 @end
 
-@implementation IAMatchmaker
+@implementation SCMatchmaker
 
 @synthesize delegate;
 
@@ -90,7 +90,6 @@
 }
 
 - (NSString*)getBundleId {
-    //return @"au.net.iapps.pokemaker";
     return [[NSBundle mainBundle] bundleIdentifier];
 }
 
@@ -98,10 +97,10 @@
 - (id) initWithKey:(NSString*)apiKey {
     return [self initWithKey:apiKey andDelegate:nil];
 }
-- (id) initWithKey:(NSString*)apiKey andDelegate:(NSObject<IAMatchmakerDelegate>*)del {
+- (id) initWithKey:(NSString*)apiKey andDelegate:(NSObject<SCMatchmakerDelegate>*)del {
     return [self initWithDeviceId:nil bundle:nil key:apiKey andDelegate:del];
 }
-- (id) initWithDeviceId:(NSString*)devId bundle:(NSString*)bundle key:(NSString*)apiKey andDelegate:(NSObject<IAMatchmakerDelegate>*)del {
+- (id) initWithDeviceId:(NSString*)devId bundle:(NSString*)bundle key:(NSString*)apiKey andDelegate:(NSObject<SCMatchmakerDelegate>*)del {
     if (self = [super init]) {
         uuid = [self getUuid] ? [[self getUuid] copy] : [devId copy];
         app = [self getBundleId] ? [[self getBundleId] copy] : [bundle copy];
@@ -116,7 +115,7 @@
 
 //public API
 //FIXME:  synchronize all
-- (BOOL)startMatch:(IAMatch*)match {
+- (BOOL)startMatch:(SCMatch*)match {
     NSDictionary* reply = [self startMatchInternal:match.matchId];
     if ([self didRequestSucceed:reply]) {
         //XXX:  don't need to stop the ping thread manually, it should stop itself as soon as the server starts/purges the match
@@ -125,7 +124,7 @@
     return [self didRequestSucceed:reply];
 }
 
-- (BOOL)cancelMatch:(IAMatch*)match {
+- (BOOL)cancelMatch:(SCMatch*)match {
     if ([match amITheServer]) {
         [match terminateServer];
         //XXX:  don't need to stop the ping thread manually, it should stop itself as soon as the server starts/purges the match
@@ -134,17 +133,17 @@
     return [self didRequestSucceed:reply];
 }
 
-- (IAMatch*)joinPrivateMatch:(NSString*)password {
+- (SCMatch*)joinPrivateMatch:(NSString*)password {
     return [self joinPrivateMatch:password withOptions:nil];
 }
 
-- (IAMatch*)joinPrivateMatch:(NSString*)password withOptions:(NSString*)options {
-    IAMatch* result = nil;
+- (SCMatch*)joinPrivateMatch:(NSString*)password withOptions:(NSString*)options {
+    SCMatch* result = nil;
     
     BOOL connected = NO;
     NSDictionary* serverMatch = [self joinMatchWithPassword:password andOptions:options];
     if ([self didRequestSucceed:serverMatch]) {
-        result = [[IAMatch alloc] initWithPlayerId:uuid andMatchmaker:self andMatchId:[serverMatch objectForKey:@"id"] andPassword:password];
+        result = [[SCMatch alloc] initWithPlayerId:uuid andMatchmaker:self andMatchId:[serverMatch objectForKey:@"id"] andPassword:password];
         int port = [[serverMatch objectForKey:@"port"] intValue];
         NSString* serverId = [serverMatch objectForKey:@"token"];
         if (! [StringUtilities isEmpty:[serverMatch objectForKey:@"localAddr"]]) {
@@ -166,15 +165,15 @@
     return connected ? result : nil;
 }
 
-- (IAMatch*)hostPrivateMatchWithMaxPlayers:(int)numPlayers {
+- (SCMatch*)hostPrivateMatchWithMaxPlayers:(int)numPlayers {
     return [self hostPrivateMatchWithMaxPlayers:numPlayers andOptions:nil];
 }
 
-- (IAMatch*)hostPrivateMatchWithMaxPlayers:(int)numPlayers andOptions:(NSString*)gameOptions {
+- (SCMatch*)hostPrivateMatchWithMaxPlayers:(int)numPlayers andOptions:(NSString*)gameOptions {
     if (numPlayers < 2) {
         numPlayers = 2;
     }
-    IAMatch* result = [[IAMatch alloc] initWithPlayerId:uuid andMatchmaker:self];
+    SCMatch* result = [[SCMatch alloc] initWithPlayerId:uuid andMatchmaker:self];
     int port = [result becomeServer];
     if (port > 0) {
         NSDictionary* serverReply = [self hostMatchOnPort:port withMaxPlayers:numPlayers andOptions:gameOptions withNetworkIp:[self getLocalIp] private:YES];
@@ -199,27 +198,27 @@
     return result;
 }
 
-- (IAMatch*)autoJoinMatch {
+- (SCMatch*)autoJoinMatch {
     return [self autoJoinMatchWithMaxPlayers:-1 creatingIfNecessary:YES];
 }
 
-- (IAMatch*)autoJoinMatchWithMaxPlayers:(int)numPlayers {
+- (SCMatch*)autoJoinMatchWithMaxPlayers:(int)numPlayers {
     return [self autoJoinMatchWithMaxPlayers:numPlayers creatingIfNecessary:YES];
 }
 
-- (IAMatch*)autoJoinMatchWithMaxPlayers:(int)numPlayers creatingIfNecessary:(BOOL)createIfNecessary {
+- (SCMatch*)autoJoinMatchWithMaxPlayers:(int)numPlayers creatingIfNecessary:(BOOL)createIfNecessary {
     return [self autoJoinMatchWithMaxPlayers:numPlayers creatingIfNecessary:createIfNecessary withOptions:nil];
 }
 
-- (IAMatch*)autoJoinMatchWithMaxPlayers:(int)numPlayers creatingIfNecessary:(BOOL)createIfNecessary withOptions:(NSString*)gameOptions {
-    IAMatch* result = nil;
+- (SCMatch*)autoJoinMatchWithMaxPlayers:(int)numPlayers creatingIfNecessary:(BOOL)createIfNecessary withOptions:(NSString*)gameOptions {
+    SCMatch* result = nil;
     
     NSDictionary* autoMatch = [self autoMatch:numPlayers withOptions:gameOptions];
     if ([self didRequestSucceed:autoMatch]) {
         BOOL connected = NO;
         int port = [[autoMatch objectForKey:@"port"] intValue];
         NSString* serverId = [autoMatch objectForKey:@"token"];
-        result = [[IAMatch alloc] initWithPlayerId:uuid andMatchmaker:self andMatchId:[autoMatch objectForKey:@"id"]];
+        result = [[SCMatch alloc] initWithPlayerId:uuid andMatchmaker:self andMatchId:[autoMatch objectForKey:@"id"]];
         if (! [StringUtilities isEmpty:[autoMatch objectForKey:@"localAddr"]]) {
             connected = [result connectToServer:[autoMatch objectForKey:@"localAddr"] onPort:port withServerId:serverId];
         }
@@ -238,7 +237,7 @@
         result = connected ? result : nil;
     }
     else if (createIfNecessary) {
-        result = [[IAMatch alloc] initWithPlayerId:uuid andMatchmaker:self];
+        result = [[SCMatch alloc] initWithPlayerId:uuid andMatchmaker:self];
         int port = [result becomeServer];
         if (port > 0) {
             NSDictionary* serverReply = [self hostMatchOnPort:port withMaxPlayers:numPlayers andOptions:gameOptions withNetworkIp:[self getLocalIp] private:NO];
@@ -406,7 +405,7 @@
     return [jsonText JSONValue];
 }
 
-- (void) pingThreadEntry: (IAMatch*)match {
+- (void) pingThreadEntry: (SCMatch*)match {
     @autoreleasepool {
         NSMutableArray* bridgeArray = [[NSMutableArray alloc] init];
         while([self didRequestSucceed:[self pingMatch:match.matchId]]) {
