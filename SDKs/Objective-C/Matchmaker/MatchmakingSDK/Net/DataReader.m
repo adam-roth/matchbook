@@ -8,7 +8,7 @@
 
 #import "DataReader.h"
 #import "DataUtils.h"
-#import "IAMatchmaker.h"
+#import "SCMatchmaker.h"
 #import "DataWriter.h"
 
 @implementation DataReader 
@@ -95,7 +95,7 @@
     [delegate dataReaderDidDisconnect:self];
 }
 
-- (id) initWithMatchmaker:(IAMatchmaker*)maker andInput:(CFReadStreamRef)dataIn andDelegate:(NSObject<DataReaderDelegate>*)del andPairedWriter:(DataWriter*)theWriter {
+- (id) initWithMatchmaker:(SCMatchmaker*)maker andInput:(CFReadStreamRef)dataIn andDelegate:(NSObject<DataReaderDelegate>*)del andPairedWriter:(DataWriter*)theWriter {
     if (self = [super init]) {
         matchmaker = [maker retain];
         input = dataIn;

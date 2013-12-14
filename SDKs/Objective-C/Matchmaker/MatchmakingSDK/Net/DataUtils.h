@@ -8,7 +8,7 @@
 
 #import <Foundation/Foundation.h>
 
-#define INTERNAL_DATA_KEY @"__iappsMatchData"
+#define INTERNAL_DATA_KEY @"__MatchData"
 
 #define BROADCAST @"broadcast"
 #define RELAY @"relay"

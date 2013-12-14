@@ -1,20 +1,20 @@
 //
-//  IAMatch.m
+//  SCMatch.m
 //  MatchmakingSDK
 //
 //  Created by Adam Roth on 27/03/12.
 //  Copyright (c) 2012 __MyCompanyName__. All rights reserved.
 //
 
-#import "IAMatch.h"
-#import "IAMatchmaker.h"
+#import "SCMatch.h"
+#import "SCMatchmaker.h"
 #import "DataUtils.h"
 #import <SBJSON/SBJson.h>
 #import "DataReader.h"
 #import "DataWriter.h"
-#import "IAMatchmakerDelegate.h"
+#import "SCMatchmakerDelegate.h"
 
-@implementation IAMatch 
+@implementation SCMatch 
  
 @synthesize matchId, port, password, myPlayerId, serverPlayerId;
 
@@ -104,7 +104,7 @@
 }
 
 //protected API
-- (void) initFieldsWithMatch:(NSString*)match andMatchmaker:(IAMatchmaker*)maker andPlayerId:(NSString*)myId andPassword:(NSString*)pass {
+- (void) initFieldsWithMatch:(NSString*)match andMatchmaker:(SCMatchmaker*)maker andPlayerId:(NSString*)myId andPassword:(NSString*)pass {
     matchId = [match copy];
     password = [pass copy];
     myPlayerId = [myId copy];
@@ -116,7 +116,7 @@
     dataWriters = [[NSMutableDictionary alloc] init];
 }
 
-- (id) initWithPlayerId:(NSString*)myId andMatchmaker:(IAMatchmaker*)maker {
+- (id) initWithPlayerId:(NSString*)myId andMatchmaker:(SCMatchmaker*)maker {
     if (self = [super init]) {
         [self initFieldsWithMatch:nil andMatchmaker:maker andPlayerId:myId andPassword:nil];
     }
@@ -124,7 +124,7 @@
     return self;
 }
 
-- (id) initWithPlayerId:(NSString*)myId andMatchmaker:(IAMatchmaker*)maker andPassword:(NSString*)pass {
+- (id) initWithPlayerId:(NSString*)myId andMatchmaker:(SCMatchmaker*)maker andPassword:(NSString*)pass {
     if (self = [super init]) {
         [self initFieldsWithMatch:nil andMatchmaker:maker andPlayerId:myId andPassword:pass];
     }
@@ -132,7 +132,7 @@
     return self;
 }
 
-- (id) initWithPlayerId:(NSString*)myId andMatchmaker:(IAMatchmaker*)maker andMatchId:(NSString*)match {
+- (id) initWithPlayerId:(NSString*)myId andMatchmaker:(SCMatchmaker*)maker andMatchId:(NSString*)match {
     if (self = [super init]) {
         [self initFieldsWithMatch:match andMatchmaker:maker andPlayerId:myId andPassword:nil];
     }
@@ -140,7 +140,7 @@
     return self;
 }
 
-- (id) initWithPlayerId:(NSString*)myId andMatchmaker:(IAMatchmaker*)maker andMatchId:(NSString*)match andPassword:(NSString*)pass {
+- (id) initWithPlayerId:(NSString*)myId andMatchmaker:(SCMatchmaker*)maker andMatchId:(NSString*)match andPassword:(NSString*)pass {
     if (self = [super init]) {
         [self initFieldsWithMatch:match andMatchmaker:maker andPlayerId:myId andPassword:pass];
     }

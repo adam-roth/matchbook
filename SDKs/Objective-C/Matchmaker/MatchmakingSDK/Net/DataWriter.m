@@ -7,10 +7,10 @@
 //
 
 #import "DataWriter.h"
-#import "IAMatchmaker.h"
+#import "SCMatchmaker.h"
 #import <SBJSON/SBJson.h>
 #import "DataUtils.h"
-#import "IAMatchmakerDelegate.h"
+#import "SCMatchmakerDelegate.h"
 
 @implementation DataWriter
 
@@ -50,7 +50,7 @@
     [delegate dataWriterDidDisconnect:self forPlayerId:playerId];
 }
 
-- (id) initWithMatchmaker:(IAMatchmaker*)maker andOutput:(CFWriteStreamRef)outData andDelegate:(NSObject<DataWriterDelegate>*)del forPlayer:(NSString*)player{
+- (id) initWithMatchmaker:(SCMatchmaker*)maker andOutput:(CFWriteStreamRef)outData andDelegate:(NSObject<DataWriterDelegate>*)del forPlayer:(NSString*)player{
     if (self = [super init]) {
         output = outData;
         self.delegate = del;

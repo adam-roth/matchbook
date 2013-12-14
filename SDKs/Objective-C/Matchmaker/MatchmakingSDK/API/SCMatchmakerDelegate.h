@@ -8,7 +8,7 @@
 
 #import <Foundation/Foundation.h>
 
-@protocol IAMatchmakerDelegate <NSObject>
+@protocol SCMatchmakerDelegate <NSObject>
 
 @required
 - (BOOL)shouldAcceptJoinFromPlayerWithId:(NSString*)playerId andDetails:(NSDictionary*)playerData;
