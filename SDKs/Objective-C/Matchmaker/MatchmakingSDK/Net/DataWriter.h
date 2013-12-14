@@ -7,18 +7,9 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "DataWriterDelegate.h"
 
 @class IAMatchmaker;
-@class DataWriter;
-
-@protocol DataWriterDelegate <NSObject>
-- (void) dataWriterDidDisconnect:(DataWriter*)writer forPlayerId:(NSString*)playerId;
-- (BOOL) amITheServer;
-- (NSString*) myPlayerId;
-- (NSString*) matchId;
-- (NSString*) matchInfo;
-- (void) playerLeft:(NSString*)playerId;
-@end
 
 @interface DataWriter : NSObject {
     //private

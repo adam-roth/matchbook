@@ -13,13 +13,10 @@
 #import <netdb.h>
 #import <Foundation/Foundation.h>
 
+#import "DataReaderDelegate.h"
+#import "DataWriterDelegate.h"
 
 @class IAMatchmaker;
-@class DataReader;
-@class DataWriter;
-
-@protocol DataReaderDelegate;
-@protocol DataWriterDelegate;
 
 @interface IAMatch : NSObject<DataReaderDelegate, DataWriterDelegate> {
     //private fields
