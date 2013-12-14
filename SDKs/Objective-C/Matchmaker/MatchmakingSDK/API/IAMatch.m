@@ -9,7 +9,7 @@
 #import "IAMatch.h"
 #import "IAMatchmaker.h"
 #import "DataUtils.h"
-#import <SBJSON/JSON.h>
+#import <SBJSON/SBJson.h>
 #import "DataReader.h"
 #import "DataWriter.h"
 #import "IAMatchmakerDelegate.h"

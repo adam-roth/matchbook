@@ -8,7 +8,7 @@
 
 #import "DataWriter.h"
 #import "IAMatchmaker.h"
-#import <SBJSON/JSON.h>
+#import <SBJSON/SBJson.h>
 #import "DataUtils.h"
 #import "IAMatchmakerDelegate.h"
 

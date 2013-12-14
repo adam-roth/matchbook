@@ -426,6 +426,7 @@
 				830FA41F154FC98800708CCD /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

@@ -8,7 +8,7 @@
 
 #import "SocketBridge.h"
 #import "DataUtils.h"
-#import <SBJSON/JSON.h>
+#import <SBJSON/SBJson.h>
 
 @implementation SocketBridge
 

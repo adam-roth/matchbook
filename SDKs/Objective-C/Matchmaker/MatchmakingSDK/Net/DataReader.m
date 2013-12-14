@@ -40,8 +40,8 @@
                         if ([delegate isPacketBroadcast:packet]) {
                             for (NSString* playerId in players) {
                                 if (! [playerId isEqual:senderId]) {
-                                    DataWriter* writer = [delegate dataWriterForPlayer:playerId];
-                                    [writer sendData:packet];
+                                    DataWriter* theWriter = [delegate dataWriterForPlayer:playerId];
+                                    [theWriter sendData:packet];
                                 }
                             }
                         }
@@ -49,8 +49,8 @@
                             NSString* recipientId = [senderDetails objectForKey:RELAY];
                             if (! [recipientId isEqual:[delegate myPlayerId]]) {
                                 ignorePacket = YES;
-                                DataWriter* writer = [delegate dataWriterForPlayer:recipientId];
-                                [writer sendData:packet];
+                                DataWriter* theWriter = [delegate dataWriterForPlayer:recipientId];
+                                [theWriter sendData:packet];
                             }
                         }
                         

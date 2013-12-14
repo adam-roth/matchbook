@@ -7,10 +7,10 @@
 //
 
 #import <Foundation/Foundation.h>
-//#import "IAMatchmakerDelegate.h"
+#import "IAMatchmakerDelegate.h"
 
 @class IAMatch;
-@protocol IAMatchmakerDelegate;
+//@protocol IAMatchmakerDelegate;
 
 @interface IAMatchmaker : NSObject {
     NSString* uuid;

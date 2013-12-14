@@ -7,7 +7,7 @@
 //
 
 #import "DataUtils.h"
-#import <SBJSON/JSON.h>
+#import <SBJSON/SBJson.h>
 
 #define ONE_BYTE 0x000000FF
 #define MAX_PACKET_SIZE 262144

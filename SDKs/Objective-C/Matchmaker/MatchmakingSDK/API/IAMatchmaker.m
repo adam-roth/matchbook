@@ -10,7 +10,7 @@
 #import "IAMatch.h"
 #import <UIKit/UIKit.h>
 #import "MatchAPI.h"
-#import <SBJSON/JSON.h>
+#import <SBJSON/SBJson.h>
 #import "NSString+JavaAPI.h"
 #import "DataUtils.h"
 #import "SocketBridge.h"
