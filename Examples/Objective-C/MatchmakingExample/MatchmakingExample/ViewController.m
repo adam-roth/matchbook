@@ -7,13 +7,10 @@
 //
 
 #import "ViewController.h"
-#import <MatchmakingSDK/API/IAMatch.h>
-#import <MatchmakingSDK/API/IAMatchmaker.h>
+#import <MatchmakingSDK/SCMatch.h>
+#import <MatchmakingSDK/SCMatchmaker.h>
 
-//au.net.iapps.pokemaker
-//#define MATCHMAKER_KEY @"295e9c682fca461b"
-
-//au.net.iapps.MatchmakingExample
+//au.com.suncoastpc.MatchmakingExample
 #define MATCHMAKER_KEY @"a3a1066147604082"
 
 #define NUM_PLAYERS 4
@@ -166,7 +163,7 @@
 
 
 - (void) setupMatch {
-    matchmaker = [[IAMatchmaker alloc] initWithKey:MATCHMAKER_KEY andDelegate:self];
+    matchmaker = [[SCMatchmaker alloc] initWithKey:MATCHMAKER_KEY andDelegate:self];
     match = [[matchmaker autoJoinMatchWithMaxPlayers:NUM_PLAYERS creatingIfNecessary:YES] retain];
     if (match) {
         self.view.backgroundColor = [UIColor blueColor];

@@ -7,14 +7,14 @@
 //
 
 #import <UIKit/UIKit.h>
-#import <MatchmakingSDK/API/IAMatchmakerDelegate.h>
+#import <MatchmakingSDK/SCMatchmakerDelegate.h>
 
-@class IAMatch;
-@class IAMatchmaker;
+@class SCMatch;
+@class SCMatchmaker;
 
-@interface ViewController : UIViewController<IAMatchmakerDelegate> {
-    IAMatch* match;
-    IAMatchmaker* matchmaker;
+@interface ViewController : UIViewController<SCMatchmakerDelegate> {
+    SCMatch* match;
+    SCMatchmaker* matchmaker;
     
     UILabel* countLabel;
     int counter;
