@@ -1,0 +1,13 @@
+<projectDescription>
+  <name>auth-framework</name>
+  <comment>Auth Framework.  Provides a basic starting point for server-based applications, handles registration, login, and authnetication/authorization tasks. NO_M2ECLIPSE_SUPPORT: Project files created with the maven-eclipse-plugin are not supported in M2Eclipse.</comment>
+  <projects/>
+  <buildSpec>
+    <buildCommand>
+      <name>org.eclipse.jdt.core.javabuilder</name>
+    </buildCommand>
+  </buildSpec>
+  <natures>
+    <nature>org.eclipse.jdt.core.javanature</nature>
+  </natures>
+</projectDescription>

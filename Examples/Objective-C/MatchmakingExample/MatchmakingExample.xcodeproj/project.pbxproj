@@ -1,0 +1,294 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		6601009E1525871B007C3C1E /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6601009D1525871B007C3C1E /* UIKit.framework */; };
+		660100A01525871B007C3C1E /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6601009F1525871B007C3C1E /* Foundation.framework */; };
+		660100A21525871B007C3C1E /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 660100A11525871B007C3C1E /* CoreGraphics.framework */; };
+		660100A81525871B007C3C1E /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 660100A61525871B007C3C1E /* InfoPlist.strings */; };
+		660100AA1525871B007C3C1E /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 660100A91525871B007C3C1E /* main.m */; };
+		660100AE1525871B007C3C1E /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 660100AD1525871B007C3C1E /* AppDelegate.m */; };
+		660100B11525871B007C3C1E /* MainStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 660100AF1525871B007C3C1E /* MainStoryboard.storyboard */; };
+		660100B41525871B007C3C1E /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 660100B31525871B007C3C1E /* ViewController.m */; };
+		660100C6152587AC007C3C1E /* MatchmakingSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 660100C5152587AC007C3C1E /* MatchmakingSDK.framework */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		660100991525871B007C3C1E /* MatchmakingExample.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MatchmakingExample.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		6601009D1525871B007C3C1E /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
+		6601009F1525871B007C3C1E /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		660100A11525871B007C3C1E /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
+		660100A51525871B007C3C1E /* MatchmakingExample-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "MatchmakingExample-Info.plist"; sourceTree = "<group>"; };
+		660100A71525871B007C3C1E /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		660100A91525871B007C3C1E /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		660100AB1525871B007C3C1E /* MatchmakingExample-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "MatchmakingExample-Prefix.pch"; sourceTree = "<group>"; };
+		660100AC1525871B007C3C1E /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
+		660100AD1525871B007C3C1E /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
+		660100B01525871B007C3C1E /* en */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = en; path = en.lproj/MainStoryboard.storyboard; sourceTree = "<group>"; };
+		660100B21525871B007C3C1E /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
+		660100B31525871B007C3C1E /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
+		660100C5152587AC007C3C1E /* MatchmakingSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MatchmakingSDK.framework; path = MatchmakingExample/MatchmakingSDK.framework; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		660100961525871B007C3C1E /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				6601009E1525871B007C3C1E /* UIKit.framework in Frameworks */,
+				660100A01525871B007C3C1E /* Foundation.framework in Frameworks */,
+				660100A21525871B007C3C1E /* CoreGraphics.framework in Frameworks */,
+				660100C6152587AC007C3C1E /* MatchmakingSDK.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		6601008E1525871B007C3C1E = {
+			isa = PBXGroup;
+			children = (
+				660100A31525871B007C3C1E /* MatchmakingExample */,
+				6601009C1525871B007C3C1E /* Frameworks */,
+				6601009A1525871B007C3C1E /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		6601009A1525871B007C3C1E /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				660100991525871B007C3C1E /* MatchmakingExample.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		6601009C1525871B007C3C1E /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				660100C5152587AC007C3C1E /* MatchmakingSDK.framework */,
+				6601009D1525871B007C3C1E /* UIKit.framework */,
+				6601009F1525871B007C3C1E /* Foundation.framework */,
+				660100A11525871B007C3C1E /* CoreGraphics.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		660100A31525871B007C3C1E /* MatchmakingExample */ = {
+			isa = PBXGroup;
+			children = (
+				660100AC1525871B007C3C1E /* AppDelegate.h */,
+				660100AD1525871B007C3C1E /* AppDelegate.m */,
+				660100AF1525871B007C3C1E /* MainStoryboard.storyboard */,
+				660100B21525871B007C3C1E /* ViewController.h */,
+				660100B31525871B007C3C1E /* ViewController.m */,
+				660100A41525871B007C3C1E /* Supporting Files */,
+			);
+			path = MatchmakingExample;
+			sourceTree = "<group>";
+		};
+		660100A41525871B007C3C1E /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				660100A51525871B007C3C1E /* MatchmakingExample-Info.plist */,
+				660100A61525871B007C3C1E /* InfoPlist.strings */,
+				660100A91525871B007C3C1E /* main.m */,
+				660100AB1525871B007C3C1E /* MatchmakingExample-Prefix.pch */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		660100981525871B007C3C1E /* MatchmakingExample */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 660100B71525871B007C3C1E /* Build configuration list for PBXNativeTarget "MatchmakingExample" */;
+			buildPhases = (
+				660100951525871B007C3C1E /* Sources */,
+				660100961525871B007C3C1E /* Frameworks */,
+				660100971525871B007C3C1E /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = MatchmakingExample;
+			productName = MatchmakingExample;
+			productReference = 660100991525871B007C3C1E /* MatchmakingExample.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		660100901525871B007C3C1E /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0420;
+			};
+			buildConfigurationList = 660100931525871B007C3C1E /* Build configuration list for PBXProject "MatchmakingExample" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = 6601008E1525871B007C3C1E;
+			productRefGroup = 6601009A1525871B007C3C1E /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				660100981525871B007C3C1E /* MatchmakingExample */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		660100971525871B007C3C1E /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				660100A81525871B007C3C1E /* InfoPlist.strings in Resources */,
+				660100B11525871B007C3C1E /* MainStoryboard.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		660100951525871B007C3C1E /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				660100AA1525871B007C3C1E /* main.m in Sources */,
+				660100AE1525871B007C3C1E /* AppDelegate.m in Sources */,
+				660100B41525871B007C3C1E /* ViewController.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXVariantGroup section */
+		660100A61525871B007C3C1E /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				660100A71525871B007C3C1E /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+		660100AF1525871B007C3C1E /* MainStoryboard.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				660100B01525871B007C3C1E /* en */,
+			);
+			name = MainStoryboard.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		660100B51525871B007C3C1E /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
+				GCC_WARN_ABOUT_MISSING_PROTOTYPES = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
+				SDKROOT = iphoneos;
+			};
+			name = Debug;
+		};
+		660100B61525871B007C3C1E /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
+				GCC_WARN_ABOUT_MISSING_PROTOTYPES = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
+				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
+				SDKROOT = iphoneos;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		660100B81525871B007C3C1E /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)/MatchmakingExample\"",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "MatchmakingExample/MatchmakingExample-Prefix.pch";
+				INFOPLIST_FILE = "MatchmakingExample/MatchmakingExample-Info.plist";
+				OTHER_LDFLAGS = "-all_load";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Debug;
+		};
+		660100B91525871B007C3C1E /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)/MatchmakingExample\"",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "MatchmakingExample/MatchmakingExample-Prefix.pch";
+				INFOPLIST_FILE = "MatchmakingExample/MatchmakingExample-Info.plist";
+				OTHER_LDFLAGS = "-all_load";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		660100931525871B007C3C1E /* Build configuration list for PBXProject "MatchmakingExample" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				660100B51525871B007C3C1E /* Debug */,
+				660100B61525871B007C3C1E /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		660100B71525871B007C3C1E /* Build configuration list for PBXNativeTarget "MatchmakingExample" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				660100B81525871B007C3C1E /* Debug */,
+				660100B91525871B007C3C1E /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 660100901525871B007C3C1E /* Project object */;
+}

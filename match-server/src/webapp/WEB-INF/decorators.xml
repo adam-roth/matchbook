@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+
+<decorators defaultdir="/WEB-INF/decorators">
+    <!-- Any urls that are excluded will never be decorated by Sitemesh -->
+    <excludes>
+        <pattern>/ajax/*</pattern>
+        <pattern>/json/*</pattern>
+    </excludes>
+
+    <decorator name="postLogin" page="postLogin.jsp" />
+    <decorator name="preLogin" page="preLogin.jsp" />    
+</decorators>
