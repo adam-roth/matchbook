@@ -2,28 +2,28 @@
 <!DOCTYPE beans PUBLIC "-//SPRING//DTD BEAN//EN" "http://www.springframework.org/dtd/spring-beans.dtd">
 <beans>
 	<!-- Provides access to basic authentication-related methods (login, register, reset password, etc.) -->
-    <bean id="authController" class="au.net.iapps.auth.spring.AuthMethods" >
+    <bean id="authController" class="au.com.suncoastpc.auth.spring.AuthMethods" >
     	<property name="methodNameResolver">
 			<ref bean="transactionHandlerMethodResolver"/>
 		</property>
 	</bean>
 	
 	<!-- Provides access to administrative functionality/tools -->
-	<bean id="adminController" class="au.net.iapps.auth.spring.AdminMethods" >
+	<bean id="adminController" class="au.com.suncoastpc.auth.spring.AdminMethods" >
     	<property name="methodNameResolver">
 			<ref bean="transactionHandlerMethodResolver"/>
 		</property>
 	</bean>
 	
 	<!-- Provides access to user functionality/tools -->
-	<bean id="userController" class="au.net.iapps.match.spring.UserMethods" >
+	<bean id="userController" class="au.com.suncoastpc.match.spring.UserMethods" >
     	<property name="methodNameResolver">
 			<ref bean="transactionHandlerMethodResolver"/>
 		</property>
 	</bean>
 	
 	<!-- Provides access to user functionality/tools -->
-	<bean id="apiController" class="au.net.iapps.match.spring.ApiMethods" >
+	<bean id="apiController" class="au.com.suncoastpc.match.spring.ApiMethods" >
     	<property name="methodNameResolver">
 			<ref bean="transactionHandlerMethodResolver"/>
 		</property>

@@ -1,7 +1,7 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <c:if test="${! empty pageName}">
-	<title>iApps - ${pageName}</title>
+	<title>Matchbook - ${pageName}</title>
 </c:if>
 <c:if test="${empty pageName}">
-	<title>iApps</title>
+	<title>Matchbook</title>
 </c:if>

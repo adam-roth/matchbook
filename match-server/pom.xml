@@ -1,8 +1,8 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
 	<modelVersion>4.0.0</modelVersion>
-	<groupId>au.net.iapps</groupId>
-	<artifactId>match-server</artifactId>
+	<groupId>au.com.suncoastpc</groupId>
+	<artifactId>matchbook-server</artifactId>
 	<version>0.01</version>
 	<packaging>war</packaging>
 	<name>Matchmaking Server</name>
@@ -77,23 +77,23 @@
 							</dependency>
 						</dependencies>
 						<systemProperties>
-        					<au.net.iapps.db.name>match_devel</au.net.iapps.db.name>
-        					<au.net.iapps.server.hostname>localhost</au.net.iapps.server.hostname>
-        					<au.net.iapps.server.port>44444</au.net.iapps.server.port>
-        					<au.net.iapps.server.protocol>http</au.net.iapps.server.protocol>
+        					<au.com.suncoastpc.db.name>match_devel</au.com.suncoastpc.db.name>
+        					<au.com.suncoastpc.server.hostname>localhost</au.com.suncoastpc.server.hostname>
+        					<au.com.suncoastpc.server.port>8080</au.com.suncoastpc.server.port>
+        					<au.com.suncoastpc.server.protocol>http</au.com.suncoastpc.server.protocol>
         				</systemProperties>
     				</container>
     				<configuration>
         				<type>standalone</type>
         				<properties>
-        					<cargo.servlet.port>44444</cargo.servlet.port>
+        					<cargo.servlet.port>8080</cargo.servlet.port>
         					<cargo.remote.username>cargointernal</cargo.remote.username>
         					<cargo.remote.password>aVeryHard%$@@!#%^**(Password1234694321!!!</cargo.remote.password>
         				</properties>
         				<deployables>
           					<deployable>
-            					<groupId>au.net.iapps</groupId>
-            					<artifactId>match-server</artifactId>
+            					<groupId>au.com.suncoastpc</groupId>
+            					<artifactId>matchbook0-server</artifactId>
             					<type>war</type>
             					<properties>
 									<context>ROOT</context>

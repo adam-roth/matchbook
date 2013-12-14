@@ -5,7 +5,7 @@
     <!-- DispatcherServlet for auth-related functionality -->
     <servlet>
     	<servlet-name>auth</servlet-name>
-     	<servlet-class>au.net.iapps.auth.spring.AuthController</servlet-class>
+     	<servlet-class>au.com.suncoastpc.auth.spring.AuthController</servlet-class>
       	<init-param>
 			<param-name>contextConfigLocation</param-name>
 			<param-value>/WEB-INF/spring-servlet.xml</param-value>
@@ -19,7 +19,7 @@
   	<!-- DispatcherServlet for administrative features -->
   	<servlet>
       	<servlet-name>admin</servlet-name>
-      	<servlet-class>au.net.iapps.auth.spring.AdminController</servlet-class>
+      	<servlet-class>au.com.suncoastpc.auth.spring.AdminController</servlet-class>
       	<init-param>
 			<param-name>contextConfigLocation</param-name>
 			<param-value>/WEB-INF/spring-servlet.xml</param-value>
@@ -33,7 +33,7 @@
   	<!-- DispatcherServlet for user features -->
   	<servlet>
       	<servlet-name>user</servlet-name>
-      	<servlet-class>au.net.iapps.match.spring.UserController</servlet-class>
+      	<servlet-class>au.com.suncoastpc.match.spring.UserController</servlet-class>
       	<init-param>
 			<param-name>contextConfigLocation</param-name>
 			<param-value>/WEB-INF/spring-servlet.xml</param-value>
@@ -47,7 +47,7 @@
   	<!-- DispatcherServlet for api features -->
   	<servlet>
       	<servlet-name>api</servlet-name>
-      	<servlet-class>au.net.iapps.match.spring.ApiController</servlet-class>
+      	<servlet-class>au.com.suncoastpc.match.spring.ApiController</servlet-class>
       	<init-param>
 			<param-name>contextConfigLocation</param-name>
 			<param-value>/WEB-INF/spring-servlet.xml</param-value>
@@ -106,7 +106,7 @@
 	<!-- Login filter -->
 	<filter>
 		<filter-name>loginCookie</filter-name>
-		<filter-class>au.net.iapps.auth.filter.LoginFromCookieFilter</filter-class>
+		<filter-class>au.com.suncoastpc.auth.filter.LoginFromCookieFilter</filter-class>
 	</filter>
 	<filter-mapping>
 		<filter-name>loginCookie</filter-name>
@@ -116,7 +116,7 @@
 	<!-- Input Sanitization filter -->
 	<filter>
 		<filter-name>inputCleaner</filter-name>
-		<filter-class>au.net.iapps.auth.filter.InputSanitizerFilter</filter-class>
+		<filter-class>au.com.suncoastpc.auth.filter.InputSanitizerFilter</filter-class>
 	</filter>
 	<filter-mapping>
 		<filter-name>inputCleaner</filter-name>
