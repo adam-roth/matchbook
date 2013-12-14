@@ -13,8 +13,11 @@
 #import <netdb.h>
 #import <Foundation/Foundation.h>
 
-#import "DataReaderDelegate.h"
-#import "DataWriterDelegate.h"
+//#import "DataReaderDelegate.h"
+//#import "DataWriterDelegate.h"
+
+@protocol DataReaderDelegate;
+@protocol DataWriterDelegate;
 
 @class SCMatchmaker;
 

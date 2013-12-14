@@ -17,6 +17,7 @@
 #import "StringUtilities.h"
 #import "SCMatchmakerDelegate.h"
 
+//FIXME:  should parameterize this; also not use pokemunity; default should probably be localhost:8080
 #define SERVER_ROOT @"http://pokemunity.com:44444/ap/"
 #define UUID_PASTEBOARD_NAME @"au.com.suncoastpc.matchmaker.uuid.v4"
 #define PING_INTERVAL 30.0
@@ -400,6 +401,7 @@
         return nil;
     }
     
+    //FIXME:  JSON libs are not carried over in framework
     NSString* jsonText = [[[NSString alloc] initWithData:responseText encoding:NSASCIIStringEncoding] trim];
     NSLog(@"Call to url=%@ returned %@", request, jsonText);
     return [jsonText JSONValue];
