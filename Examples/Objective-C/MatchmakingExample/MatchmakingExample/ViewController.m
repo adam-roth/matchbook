@@ -11,13 +11,14 @@
 #import <MatchmakingSDK/SCMatchmaker.h>
 
 //au.com.suncoastpc.MatchmakingExample
-#define MATCHMAKER_KEY @"a3a1066147604082"
+#define MATCHMAKER_KEY @"6308ca8e19634e2a"
 
 #define NUM_PLAYERS 4
 #define LABEL_SIZE 44
 
 @implementation ViewController
 
+//demonstrates a simple periodic message broadcast to all players
 - (void) pingLoop {
     @autoreleasepool {
         while ([[match players] count] > 0) {
@@ -107,6 +108,7 @@
     return [[match players] count] < NUM_PLAYERS - 1;  //players will never contain our own id, and it will not yet contain the joining player id
 }
 
+//handles the various messages that we can recieve from our "game"
 - (void)receivedData: (NSDictionary*)data fromPlayerWithId:(NSString*)playerId {
     //handling messages from players
     if ([[data objectForKey:@"message"] isEqual:@"PING!"]) {
@@ -129,6 +131,7 @@
     }
 }
 
+//handle player join events; note that for our pusposes we only care about these events when we are the acting host
 - (void)playerJoinedWithId:(NSString*)playerId andDetails:(NSDictionary*)playerData {
     //handling joins from players
     if (match && [match amITheServer]) {
@@ -145,6 +148,7 @@
     
 }
 
+//handle player disconnect events; again we only care about these when acting as the host
 - (void)playerLeft:(NSString*)playerId {
     //handling disconnects from players
     //[matchmaker cancelMatch:match];
@@ -163,7 +167,8 @@
 
 
 - (void) setupMatch {
-    matchmaker = [[SCMatchmaker alloc] initWithKey:MATCHMAKER_KEY andDelegate:self];
+    matchmaker = [[SCMatchmaker alloc] initWithKey:MATCHMAKER_KEY andDelegate:self];                                                        //XXX:  uses server URL contained in Info plist
+    //matchmaker = [[SCMatchmaker alloc] initWithKey:MATCHMAKER_KEY andServerAddress:@"http://127.0.0.1:8080/ap/" andDelegate:self];        //XXX:  explicit server URL
     match = [[matchmaker autoJoinMatchWithMaxPlayers:NUM_PLAYERS creatingIfNecessary:YES] retain];
     if (match) {
         self.view.backgroundColor = [UIColor blueColor];
