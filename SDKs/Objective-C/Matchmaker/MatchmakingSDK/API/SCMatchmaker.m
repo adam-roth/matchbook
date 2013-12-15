@@ -17,8 +17,8 @@
 #import "StringUtilities.h"
 #import "SCMatchmakerDelegate.h"
 
-#define SERVER_ROOT @"http://pokemunity.com:44444/ap/"
-#define UUID_PASTEBOARD_NAME @"au.com.suncoastpc.matchmaker.uuid.v4"
+#define SERVER_ROOT @"http://localhost:8080/ap/"
+#define UUID_PASTEBOARD_NAME @"au.com.suncoastpc.matchbook.uuid.v4"
 #define PING_INTERVAL 30.0
 
 @interface SCMatchmaker (Private)
@@ -93,20 +93,36 @@
     return [[NSBundle mainBundle] bundleIdentifier];
 }
 
+- (NSString*)defaultServer {
+    NSString* result = [[NSBundle mainBundle] objectForInfoDictionaryKey:@"au.com.suncoastpc.matchbook.server"];
+    
+    return result ? result : SERVER_ROOT;
+}
+
 //constructors
 - (id) initWithKey:(NSString*)apiKey {
-    return [self initWithKey:apiKey andDelegate:nil];
+    return [self initWithKey:apiKey andServerAddress:[self defaultServer]];
 }
+
+- (id) initWithKey:(NSString*)apiKey andServerAddress:(NSString*)serverRoot {
+    return [self initWithKey:apiKey andServerAddress: serverRoot andDelegate:nil];
+}
+
 - (id) initWithKey:(NSString*)apiKey andDelegate:(NSObject<SCMatchmakerDelegate>*)del {
-    return [self initWithDeviceId:nil bundle:nil key:apiKey andDelegate:del];
+    return [self initWithKey:apiKey andServerAddress:[self defaultServer] andDelegate:del];
 }
-- (id) initWithDeviceId:(NSString*)devId bundle:(NSString*)bundle key:(NSString*)apiKey andDelegate:(NSObject<SCMatchmakerDelegate>*)del {
+
+- (id) initWithKey:(NSString*)apiKey andServerAddress:(NSString*)serverRoot andDelegate:(NSObject<SCMatchmakerDelegate>*)del {
+    return [self initWithDeviceId:nil bundle:nil key:apiKey andServerAddress:serverRoot andDelegate:del];
+}
+- (id) initWithDeviceId:(NSString*)devId bundle:(NSString*)bundle key:(NSString*)apiKey andServerAddress:(NSString*)serverRoot andDelegate:(NSObject<SCMatchmakerDelegate>*)del {
     if (self = [super init]) {
         uuid = [self getUuid] ? [[self getUuid] copy] : [devId copy];
         app = [self getBundleId] ? [[self getBundleId] copy] : [bundle copy];
         secret = [apiKey copy];
+        serverBaseUrl = [serverRoot copy];
         self.delegate = del;
-        NSLog(@"Matchmaking API initialized with uuid=%@, bundle=%@, secret=%@", uuid, app, secret);
+        NSLog(@"Matchbook API initialized with uuid=%@, bundle=%@, secret=%@, server=%@", uuid, app, secret, serverBaseUrl);
     }
     
     return self;
@@ -116,6 +132,7 @@
     [uuid release];
     [app release];
     [secret release];
+    [serverBaseUrl release];
     self.delegate = nil;
     [super dealloc];
 }
@@ -395,7 +412,7 @@
 }
 
 - (NSDictionary*)callMethod:(ApiMethod)method withParams:(NSDictionary*)params {
-    NSString* requestUrl = [MatchAPI urlForMethod:method onServer:SERVER_ROOT withParams:params];
+    NSString* requestUrl = [MatchAPI urlForMethod:method onServer:serverBaseUrl withParams:params];
     NSMutableURLRequest* request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:requestUrl]];
     [request setHTTPMethod:@"POST"];
     
