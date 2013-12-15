@@ -104,6 +104,10 @@
     return [self initWithKey:apiKey andServerAddress:[self defaultServer]];
 }
 
+- (id) initWithKey:(NSString*)apiKey andDelegate:(NSObject<SCMatchmakerDelegate>*)del {
+    return [self initWithKey:apiKey andServerAddress:[self defaultServer] andDelegate:del];
+}
+
 - (id) initWithKey:(NSString*)apiKey andServerAddress:(NSString*)serverRoot {
     return [self initWithKey:apiKey andServerAddress: serverRoot andDelegate:nil];
 }

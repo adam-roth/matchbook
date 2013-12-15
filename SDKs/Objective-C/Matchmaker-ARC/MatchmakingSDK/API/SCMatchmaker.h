@@ -21,6 +21,7 @@
 //constructors
 - (id) initWithKey:(NSString*)apiKey;
 - (id) initWithKey:(NSString*)apiKey andServerAddress:(NSString*)serverRoot;
+- (id) initWithKey:(NSString*)apiKey andDelegate:(NSObject<SCMatchmakerDelegate>*)del;
 - (id) initWithKey:(NSString*)apiKey andServerAddress:(NSString*)serverRoot andDelegate:(NSObject<SCMatchmakerDelegate>*)del;
 - (id) initWithDeviceId:(NSString*)devId bundle:(NSString*)bundle key:(NSString*)apiKey andServerAddress:(NSString*)serverRoot andDelegate:(NSObject<SCMatchmakerDelegate>*)del;
 
