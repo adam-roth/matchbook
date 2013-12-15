@@ -20,6 +20,8 @@ static NSString* METHOD_NAMES[] = {@"autoMatch", @"hostMatch", @"joinMatch", @"p
 }
 
 + (NSString*)urlForMethod:(ApiMethod)method onServer:(NSString*)serverBase {
+    serverBase = [self checkServerBase:serverBase];
+    
     NSString* methodName = [self methodNameFor:method];
     if ([serverBase endsWith:@"/"]) {
         return [serverBase stringByAppendingFormat:@"%@?format=json", methodName];
@@ -28,6 +30,8 @@ static NSString* METHOD_NAMES[] = {@"autoMatch", @"hostMatch", @"joinMatch", @"p
 }
 
 + (NSString*)urlForMethod:(ApiMethod)method onServer:(NSString*)serverBase withQueryString:(NSString*)queryString {
+    serverBase = [self checkServerBase:serverBase];
+    
     NSString* methodName = [self methodNameFor:method];
     if ([StringUtilities isEmpty:queryString]) {
         return [self urlForMethod:method onServer:serverBase];
@@ -40,6 +44,8 @@ static NSString* METHOD_NAMES[] = {@"autoMatch", @"hostMatch", @"joinMatch", @"p
 }
 
 + (NSString*)urlForMethod:(ApiMethod)method onServer:(NSString*)serverBase withParams:(NSDictionary*)queryParams {
+    serverBase = [self checkServerBase:serverBase];
+    
     NSString* queryString = @"";
     for (NSString* key in [queryParams keyEnumerator]) {
         if (! [StringUtilities isEmpty:[queryParams objectForKey:key]]) {
@@ -53,6 +59,22 @@ static NSString* METHOD_NAMES[] = {@"autoMatch", @"hostMatch", @"joinMatch", @"p
     }
     
     return [self urlForMethod:method onServer:serverBase withQueryString:queryString];
+}
+
++ (NSString*) checkServerBase:(NSString*)serverBase {
+    //make sure we have a sane server URL; we assume that the webservice API methods have not been moved from their default path of '/ap'
+    if (! [serverBase endsWith:@"/ap/"]) {
+        NSLog(@"WARN:  The provided Matchbook server URL does not appear valid; url=%@", serverBase);
+        if ([serverBase endsWith:@"/ap"]) {
+            serverBase = [serverBase stringByAppendingString:@"/"];
+        }
+        else {
+            serverBase = [serverBase stringByAppendingString:@"/ap/"];
+        }
+        NSLog(@"WARN:  Matchbook will attempt to use the following server URL:  %@", serverBase);
+    }
+    
+    return serverBase;
 }
 
 @end

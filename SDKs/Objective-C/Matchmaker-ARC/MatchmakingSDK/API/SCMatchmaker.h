@@ -15,12 +15,14 @@
     NSString* uuid;
     NSString* app;
     NSString* secret;
+    NSString* serverBaseUrl;
 }
 
 //constructors
 - (id) initWithKey:(NSString*)apiKey;
-- (id) initWithKey:(NSString*)apiKey andDelegate:(NSObject<SCMatchmakerDelegate>*)delegate;
-- (id) initWithDeviceId:(NSString*)devId bundle:(NSString*)bundle key:(NSString*)apiKey andDelegate:(NSObject<SCMatchmakerDelegate>*)delegate;
+- (id) initWithKey:(NSString*)apiKey andServerAddress:(NSString*)serverRoot;
+- (id) initWithKey:(NSString*)apiKey andServerAddress:(NSString*)serverRoot andDelegate:(NSObject<SCMatchmakerDelegate>*)del;
+- (id) initWithDeviceId:(NSString*)devId bundle:(NSString*)bundle key:(NSString*)apiKey andServerAddress:(NSString*)serverRoot andDelegate:(NSObject<SCMatchmakerDelegate>*)del;
 
 //protected/internal API
 - (NSDictionary*)player:(NSString*)playerId leftMatch:(NSString*)matchId;
