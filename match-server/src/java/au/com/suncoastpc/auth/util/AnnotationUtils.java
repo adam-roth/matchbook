@@ -74,16 +74,16 @@ public class AnnotationUtils {
 	 * 
 	 * @return true if all pre-request annotations pass validation, false otherwise.
 	 */
-	public static boolean validatePreRequestAnnotations(Class<? extends MultiActionController> methodClass, String methodName, HttpServletRequest request) {
+	public static boolean validatePreRequestAnnotations(Class<? extends MultiActionController> methodClass, String methodName, HttpServletRequest request, HttpServletResponse response) {
 		try {
 			Method targetMethod = methodClass.getMethod(methodName, HttpServletRequest.class, HttpServletResponse.class);
 			Map<Class<? extends Annotation>, Annotation> annotations = mergeConstraintsFromClassAndMethod(methodClass, targetMethod);
-			if (! processOrderedAnnotations(PRE_REQUEST_ANNOTATIONS, annotations, request)) {
+			if (! processOrderedAnnotations(PRE_REQUEST_ANNOTATIONS, annotations, request, response)) {
 				return false;
 			}
 			
 			//process any un-ordered annotations that are left in the map
-			return processPreRequestAnnotations(annotations, request);
+			return processPreRequestAnnotations(annotations, request, response);
 			
 		}
 		catch (Throwable e) {
@@ -102,16 +102,16 @@ public class AnnotationUtils {
 	 * 
 	 * @return true if all post-request annotations pass validation, false otherwise.
 	 */
-	public static boolean validatePostRequestAnnotations(Class<? extends MultiActionController> methodClass, String methodName, HttpServletRequest request) {
+	public static boolean validatePostRequestAnnotations(Class<? extends MultiActionController> methodClass, String methodName, HttpServletRequest request, HttpServletResponse response) {
 		try {
 			Method targetMethod = methodClass.getMethod(methodName, HttpServletRequest.class, HttpServletResponse.class);
 			Map<Class<? extends Annotation>, Annotation> annotations = mergeConstraintsFromClassAndMethod(methodClass, targetMethod);
-			if (! processOrderedAnnotations(POST_REQUEST_ANNOTATIONS, annotations, request)) {
+			if (! processOrderedAnnotations(POST_REQUEST_ANNOTATIONS, annotations, request, response)) {
 				return false;
 			}
 			
 			//process any un-ordered annotations that are left in the map
-			return processPostRequestAnnotations(annotations, request);
+			return processPostRequestAnnotations(annotations, request, response);
 		}
 		catch (Throwable e) {
 			//error during validation, validation failed
@@ -182,27 +182,27 @@ public class AnnotationUtils {
 		return result;
 	}
 	
-	private static boolean processPreRequestAnnotations(Map<Class<? extends Annotation>, Annotation> annotations, HttpServletRequest request) {
+	private static boolean processPreRequestAnnotations(Map<Class<? extends Annotation>, Annotation> annotations, HttpServletRequest request, HttpServletResponse response) {
 		for (Class<? extends Annotation> key : annotations.keySet()) {
-			if (! processAnnotation(annotations.get(key), request, true, false)) {
+			if (! processAnnotation(annotations.get(key), request, response, true, false)) {
 				return false;
 			}
 		}
 		return true;
 	}
 	
-	private static boolean processPostRequestAnnotations(Map<Class<? extends Annotation>, Annotation> annotations, HttpServletRequest request) {
+	private static boolean processPostRequestAnnotations(Map<Class<? extends Annotation>, Annotation> annotations, HttpServletRequest request, HttpServletResponse response) {
 		for (Class<? extends Annotation> key : annotations.keySet()) {
-			if (! processAnnotation(annotations.get(key), request, false, true)) {
+			if (! processAnnotation(annotations.get(key), request, response, false, true)) {
 				return false;
 			}
 		}
 		return true;
 	}
 	
-	private static boolean processOrderedAnnotations(List<Class<? extends Annotation>> annotationsToProcess, Map<Class<? extends Annotation>, Annotation> annotations, HttpServletRequest request) {
+	private static boolean processOrderedAnnotations(List<Class<? extends Annotation>> annotationsToProcess, Map<Class<? extends Annotation>, Annotation> annotations, HttpServletRequest request, HttpServletResponse response) {
 		for (Class<? extends Annotation> key : annotationsToProcess) {
-			if (! processAnnotation(annotations.get(key), request, true, true)) {
+			if (! processAnnotation(annotations.get(key), request, response, true, true)) {
 				return false;
 			}
 			annotations.remove(key);
@@ -211,7 +211,7 @@ public class AnnotationUtils {
 		return true;
 	}
 	
-	private static boolean processAnnotation(Annotation annotation, HttpServletRequest request, boolean preRequest, boolean postRequest) {
+	private static boolean processAnnotation(Annotation annotation, HttpServletRequest request, HttpServletResponse response, boolean preRequest, boolean postRequest) {
 		if (annotation == null) {
 			//not there, return true
 			return true;
@@ -230,7 +230,7 @@ public class AnnotationUtils {
 		}
 		if (processor != null) {
 			if ((preRequest && processor.validatesBeforeExecution()) || (postRequest && processor.validatesAfterExecution())) {
-				return processor.processRequest(annotation, request);
+				return processor.processRequest(annotation, request, response);
 			}
 		}
 		

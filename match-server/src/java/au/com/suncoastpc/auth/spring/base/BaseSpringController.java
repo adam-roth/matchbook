@@ -78,7 +78,7 @@ public abstract class BaseSpringController extends DispatcherServlet {
 		//validate any pre-request authorization constraints, dump the user to the default landing page if they fail
 		OverridableHttpRequest overriddenRequest = new OverridableHttpRequest(request);
 		String method = request.getParameter(this.getMethodMappingParamName());
-		if (! AnnotationUtils.validatePreRequestAnnotations(this.getControllerClass(), method, overriddenRequest)) {
+		if (! AnnotationUtils.validatePreRequestAnnotations(this.getControllerClass(), method, overriddenRequest, response)) {
 			if (request.getSession().getAttribute(Constants.SESSION_USER_KEY) == null) {
 				//user is not logged in, so remember their desired URL so that we can redirect them to it if/when they log in
 				overriddenRequest.setAttribute(Constants.POST_LOGIN_URL_KEY, getUrl(request));
@@ -122,7 +122,7 @@ public abstract class BaseSpringController extends DispatcherServlet {
 		
 		//validate any post-request authorization constraints, dump the user to the login page and end their session if they fail
 		String method = request.getParameter(this.getMethodMappingParamName());
-		if (! AnnotationUtils.validatePostRequestAnnotations(this.getControllerClass(), method, request)) {
+		if (! AnnotationUtils.validatePostRequestAnnotations(this.getControllerClass(), method, request, response)) {
 			request.setAttribute("error", "Your request could not be processed, please try again");
 			request.getSession().removeAttribute(Constants.SESSION_USER_KEY);
 			mv = new ModelAndView("login");

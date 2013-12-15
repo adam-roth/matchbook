@@ -7,6 +7,7 @@ import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 import au.com.suncoastpc.auth.util.Constants;
 
@@ -24,7 +25,7 @@ import au.com.suncoastpc.auth.util.Constants;
 public @interface ForbidsLogin {
 	public static class Processor implements AnnotationProcessor {
 		@Override
-		public boolean processRequest(Annotation theAnnotation, HttpServletRequest request) {
+		public boolean processRequest(Annotation theAnnotation, HttpServletRequest request, HttpServletResponse response) {
 			if (! (theAnnotation instanceof ForbidsLogin)) {
 				//someone made an invalid call, just return true
 				return true;

@@ -8,6 +8,7 @@ import java.lang.annotation.Target;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 import org.apache.log4j.Logger;
 
@@ -37,7 +38,7 @@ public @interface BypassesQuarantine {
 		
 		@Override
 		@SuppressWarnings("unchecked")
-		public boolean processRequest(Annotation theAnnotation, HttpServletRequest request) {
+		public boolean processRequest(Annotation theAnnotation, HttpServletRequest request, HttpServletResponse response) {
 			if (! (request instanceof OverridableHttpRequest) || (! (theAnnotation instanceof BypassesQuarantine))) {
 				//can't do anything, just return true
 				return true;

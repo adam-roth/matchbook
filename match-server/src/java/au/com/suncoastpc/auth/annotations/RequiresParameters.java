@@ -7,6 +7,7 @@ import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 import org.apache.log4j.Logger;
 
@@ -34,7 +35,7 @@ public @interface RequiresParameters {
 		private static final Logger LOG = Logger.getLogger(RequiresParameters.class);
 		
 		@Override
-		public boolean processRequest(Annotation theAnnotation, HttpServletRequest request) {
+		public boolean processRequest(Annotation theAnnotation, HttpServletRequest request, HttpServletResponse response) {
 			if (! (theAnnotation instanceof RequiresParameters)) {
 				//someone made an invalid call, just return true
 				return true;

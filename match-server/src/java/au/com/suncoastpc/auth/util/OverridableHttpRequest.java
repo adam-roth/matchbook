@@ -4,6 +4,7 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.security.Principal;
+import java.util.Collection;
 import java.util.Collections;
 import java.util.Enumeration;
 import java.util.HashMap;
@@ -12,22 +13,36 @@ import java.util.Locale;
 import java.util.Map;
 import java.util.Set;
 
+import javax.servlet.AsyncContext;
+import javax.servlet.DispatcherType;
 import javax.servlet.RequestDispatcher;
+import javax.servlet.ServletContext;
+import javax.servlet.ServletException;
 import javax.servlet.ServletInputStream;
+import javax.servlet.ServletRequest;
+import javax.servlet.ServletResponse;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import javax.servlet.http.Part;
+
+import org.apache.log4j.Logger;
 
 public class OverridableHttpRequest implements HttpServletRequest {
+	
+private static final Logger LOG = Logger.getLogger(OverridableHttpRequest.class);
 	
 	private HttpServletRequest wrappedRequest;
 	private Map<String, String> newParams;
 	private Set<String> removedParams;
+	private ResettableServletInputStream wrappedStream;
 	
-	public OverridableHttpRequest(HttpServletRequest requestToWrap) {
+	public OverridableHttpRequest(HttpServletRequest requestToWrap) throws IOException {
 		this.wrappedRequest = requestToWrap;
 		this.newParams = new HashMap<String, String>();
 		this.removedParams = new HashSet<String>();
+		this.wrappedStream = null;//new ResettableServletInputStream(requestToWrap.getInputStream());
 	}
 	
 	//these things we add so that params can be overridden
@@ -43,7 +58,7 @@ public class OverridableHttpRequest implements HttpServletRequest {
 	
 	
 	//these things we need to override so that the correct state is exposed through the standard API
-	@SuppressWarnings("rawtypes")
+	@SuppressWarnings({ "rawtypes", "unchecked" })
 	@Override
 	public Enumeration getParameterNames() {
 		Set<String> result = new HashSet<String>();
@@ -78,7 +93,7 @@ public class OverridableHttpRequest implements HttpServletRequest {
 		return this.wrappedRequest.getParameter(arg0);
 	}
 
-	@SuppressWarnings("rawtypes")
+	@SuppressWarnings({ "rawtypes", "unchecked" })
 	@Override
 	public Map getParameterMap() {
 		Map<String, String[]> result = new HashMap<String, String[]>();
@@ -122,7 +137,7 @@ public class OverridableHttpRequest implements HttpServletRequest {
 		return this.wrappedRequest.getAttribute(arg0);
 	}
 
-	@SuppressWarnings("rawtypes")
+	@SuppressWarnings({ "rawtypes", "unchecked" })
 	@Override
 	public Enumeration getAttributeNames() {
 		return this.wrappedRequest.getAttributeNames();
@@ -145,7 +160,10 @@ public class OverridableHttpRequest implements HttpServletRequest {
 
 	@Override
 	public ServletInputStream getInputStream() throws IOException {
-		return this.wrappedRequest.getInputStream();
+		if (this.wrappedStream == null) {
+			this.wrappedStream = new ResettableServletInputStream(this.wrappedRequest.getInputStream());
+		}
+		return this.wrappedStream;//this.wrappedRequest.getInputStream();
 	}
 
 	@Override
@@ -168,7 +186,7 @@ public class OverridableHttpRequest implements HttpServletRequest {
 		return this.wrappedRequest.getLocale();
 	}
 
-	@SuppressWarnings("rawtypes")
+	@SuppressWarnings({ "rawtypes", "unchecked" })
 	@Override
 	public Enumeration getLocales() {
 		return this.wrappedRequest.getLocales();
@@ -181,7 +199,7 @@ public class OverridableHttpRequest implements HttpServletRequest {
 
 	@Override
 	public BufferedReader getReader() throws IOException {
-		return this.wrappedRequest.getReader();
+		return this.wrappedRequest.getReader();//new BufferedReader(new InputStreamReader(this.getInputStream()));//this.wrappedRequest.getReader();
 	}
 
 	@SuppressWarnings("deprecation")
@@ -271,13 +289,13 @@ public class OverridableHttpRequest implements HttpServletRequest {
 		return this.wrappedRequest.getHeader(arg0);
 	}
 
-	@SuppressWarnings("rawtypes")
+	@SuppressWarnings({ "rawtypes", "unchecked" })
 	@Override
 	public Enumeration getHeaderNames() {
 		return this.wrappedRequest.getHeaderNames();
 	}
 
-	@SuppressWarnings("rawtypes")
+	@SuppressWarnings({ "rawtypes", "unchecked" })
 	@Override
 	public Enumeration getHeaders(String arg0) {
 		return this.wrappedRequest.getHeaders(arg0);
@@ -357,6 +375,77 @@ public class OverridableHttpRequest implements HttpServletRequest {
 	@Override
 	public boolean isUserInRole(String arg0) {
 		return this.wrappedRequest.isUserInRole(arg0);
+	}
+
+	@Override
+	public AsyncContext getAsyncContext() {
+		//LOG.warn("Async contexts are not wrapped; modified/sanitized parameters will not be present!");
+		return this.wrappedRequest.getAsyncContext();
+	}
+
+	@Override
+	public DispatcherType getDispatcherType() {
+		return this.wrappedRequest.getDispatcherType();
+	}
+
+	@Override
+	public ServletContext getServletContext() {
+		return this.wrappedRequest.getServletContext();
+	}
+
+	@Override
+	public boolean isAsyncStarted() {
+		return this.wrappedRequest.isAsyncStarted();
+	}
+
+	@Override
+	public boolean isAsyncSupported() {
+		//XXX:  an AsyncContext includes a direct reference back to the original request, meaning it will not reflect any modifications made in the wrapped; so we should not allow the use of aync contexts through a wrapped request
+		//return this.wrappedRequest.isAsyncSupported();
+		return false;
+	}
+
+	@Override
+	public AsyncContext startAsync() throws IllegalStateException {
+		LOG.warn("Async contexts are not wrapped (1); modified/sanitized parameters will not be present!");
+		throw new IllegalStateException("Async operations is not supported using wrapped requests!");
+		//return this.wrappedRequest.startAsync();
+	}
+
+	@Override
+	public AsyncContext startAsync(ServletRequest arg0, ServletResponse arg1) throws IllegalStateException {
+		LOG.warn("Async contexts are not wrapped (2); modified/sanitized parameters will not be present!");
+		throw new IllegalStateException("Async operations is not supported using wrapped requests!");
+		//return this.wrappedRequest.startAsync(arg0, arg1);
+	}
+
+	@Override
+	public boolean authenticate(HttpServletResponse arg0) throws IOException, ServletException {
+		return this.wrappedRequest.authenticate(arg0);
+	}
+
+	@Override
+	public Part getPart(String arg0) throws IOException, ServletException {
+		LOG.warn("Multipart parameters are not wrapped (1); please use commons-fileupload instead!");
+		throw new ServletException("Multipart parameters cannot be directly accessed through a wrapped request; consider using commons-fileupload to parse the request instead!");
+		//return this.wrappedRequest.getPart(arg0);
+	}
+
+	@Override
+	public Collection<javax.servlet.http.Part> getParts() throws IOException, ServletException {
+		LOG.warn("Multipart parameters are not wrapped (2); please use commons-fileupload instead!");
+		throw new ServletException("Multipart parameters cannot be directly accessed through a wrapped request; consider using commons-fileupload to parse the request instead!");
+		//return this.wrappedRequest.getParts();
+	}
+
+	@Override
+	public void login(String arg0, String arg1) throws ServletException {
+		this.wrappedRequest.login(arg0, arg1);
+	}
+
+	@Override
+	public void logout() throws ServletException {
+		this.wrappedRequest.logout();
 	}
 
 }

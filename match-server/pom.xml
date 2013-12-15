@@ -62,9 +62,9 @@
   				<artifactId>cargo-maven2-plugin</artifactId>
   				<configuration>
     				<container>
-      					<containerId>tomcat6x</containerId>
+      					<containerId>tomcat7x</containerId>
       					<zipUrlInstaller>
-        					<url>http://archive.apache.org/dist/tomcat/tomcat-6/v6.0.35/bin/apache-tomcat-6.0.35.zip</url>
+        					<url>http://archive.apache.org/dist/tomcat/tomcat-7/v7.0.47/bin/apache-tomcat-7.0.47.zip</url>
       					</zipUrlInstaller>
 						<dependencies>
 							<dependency>
@@ -86,14 +86,19 @@
     				<configuration>
         				<type>standalone</type>
         				<properties>
+        					<!-- Ports used by Tomcat -->
         					<cargo.servlet.port>8080</cargo.servlet.port>
+        					<cargo.tomcat.ajp.port>8083</cargo.tomcat.ajp.port>
+							<cargo.tomcat.shutdown.port>8082</cargo.tomcat.shutdown.port>
+        					<cargo.rmi.port>8084</cargo.rmi.port>
+        					
         					<cargo.remote.username>cargointernal</cargo.remote.username>
         					<cargo.remote.password>aVeryHard%$@@!#%^**(Password1234694321!!!</cargo.remote.password>
         				</properties>
         				<deployables>
           					<deployable>
             					<groupId>au.com.suncoastpc</groupId>
-            					<artifactId>matchbook0-server</artifactId>
+            					<artifactId>matchbook-server</artifactId>
             					<type>war</type>
             					<properties>
 									<context>ROOT</context>
@@ -258,8 +263,8 @@
 		</dependency>							
 		<dependency>
 			<groupId>javax.servlet</groupId>
-			<artifactId>servlet-api</artifactId>
-			<version>2.5</version>
+			<artifactId>javax.servlet-api</artifactId>
+			<version>3.0.1</version>
 			<scope>provided</scope>
 		</dependency>
 		<dependency>
@@ -279,7 +284,6 @@
 			<version>3.2.0</version>
 		</dependency>
 		
-		<!-- INSTALL THESE IN SERVER'S /lib FOLDER -->
 		<dependency>
 			<groupId>javax.persistence</groupId>
 			<artifactId>persistence-api</artifactId>
@@ -370,7 +374,6 @@
 			<version>1.4</version>
 			<scope>provided</scope>
 		</dependency>
-		<!-- END OF THINGS TO INSTALL ON SERVER -->
 		
 		<dependency>
 			<groupId>opensymphony</groupId>

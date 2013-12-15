@@ -1,6 +1,7 @@
 package au.com.suncoastpc.auth.util;
 
 
+
 /**
  * Contains various configuration parameters that may be overridden by system properties 
  * when starting the server.  The 'private static final' fields are used to store 
@@ -39,6 +40,10 @@ public class Configuration {
 	
 	private static Integer numAccountLocks = null;
 	
+	//profiling
+	private static final boolean PROFILING_ENABLED;
+	private static Boolean profilingEnabled;
+	
 	
 	static {
 		String host = System.getProperty("au.com.suncoastpc.server.hostname", "localhost").toLowerCase();
@@ -58,6 +63,9 @@ public class Configuration {
 		SERVER_HOST_NAME = host;
 		SERVER_PORT = Integer.parseInt(port);
 		REQUIRES_SECURE_CONNECTION = "https".equals(protocol);
+		
+		String profile = System.getProperty("au.com.suncoastpc.profiling.enabled", "true").toLowerCase();
+		PROFILING_ENABLED = "true".equals(profile);
 	}
 	
 	//composite configuration property, not settable directly
@@ -144,5 +152,17 @@ public class Configuration {
 			return;
 		}
 		Configuration.localMailServer = Boolean.valueOf(localMailServer);
+	}
+	
+	//performance profiling
+	public static boolean getProfilingEnabled() {
+		return profilingEnabled == null ? PROFILING_ENABLED : profilingEnabled;
+	}
+	public static void setProfilingEnabled(String profiling) {
+		if (profiling == null) {
+			Configuration.profilingEnabled = null;
+			return;
+		}
+		Configuration.profilingEnabled = Boolean.valueOf(profiling);
 	}
 }

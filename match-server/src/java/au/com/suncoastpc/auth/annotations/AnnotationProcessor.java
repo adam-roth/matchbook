@@ -3,6 +3,7 @@ package au.com.suncoastpc.auth.annotations;
 import java.lang.annotation.Annotation;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 /**
  * Provides a generic interface for annotation validator implementations.  The recommended usage 
@@ -24,7 +25,7 @@ public interface AnnotationProcessor {
 	 * 
 	 * @return true if validation succeeds, false otherwise.
 	 */
-	public boolean processRequest(Annotation theAnnotation, HttpServletRequest request);
+	public boolean processRequest(Annotation theAnnotation, HttpServletRequest request, HttpServletResponse response);
 	
 	/**
 	 * @return true if this annotation performs validation prior to request execution, false otherwise.
@@ -36,3 +37,4 @@ public interface AnnotationProcessor {
 	 */
 	public boolean validatesAfterExecution();
 }
+
