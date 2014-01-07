@@ -58,6 +58,8 @@ public abstract class BaseMethods extends MultiActionController implements Messa
 		String pass = request.getParameter("pass");
 		if (pass.equals(request.getParameter("conf"))) {
 			//create the admin account
+			em.getTransaction().begin();
+			
 			User admin = new User();
 			admin.setEmail("admin");
 			admin.setName("Matchbook Admin");
@@ -66,6 +68,8 @@ public abstract class BaseMethods extends MultiActionController implements Messa
 			admin.setPassword(pass);
 			
 			em.persist(admin);
+			
+			em.getTransaction().commit();
 			
 			//log into the admin account
 			request.getSession().setAttribute(Constants.SESSION_USER_KEY, admin);
