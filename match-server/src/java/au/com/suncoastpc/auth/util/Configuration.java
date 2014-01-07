@@ -44,6 +44,10 @@ public class Configuration {
 	private static final boolean PROFILING_ENABLED;
 	private static Boolean profilingEnabled;
 	
+	//HTTP sessions
+	private static final int HTTP_TIMEOUT_MINUTES;
+	private static Integer httpTimeoutMinutes = null;
+	
 	
 	static {
 		String host = System.getProperty("au.com.suncoastpc.server.hostname", "localhost").toLowerCase();
@@ -66,6 +70,9 @@ public class Configuration {
 		
 		String profile = System.getProperty("au.com.suncoastpc.profiling.enabled", "true").toLowerCase();
 		PROFILING_ENABLED = "true".equals(profile);
+		
+		String timeout = System.getProperty("au.com.suncoastpc.server.http.timeout", "120");
+		HTTP_TIMEOUT_MINUTES = Integer.parseInt(timeout);
 	}
 	
 	//composite configuration property, not settable directly
@@ -164,5 +171,17 @@ public class Configuration {
 			return;
 		}
 		Configuration.profilingEnabled = Boolean.valueOf(profiling);
+	}
+	
+	//HTTP session timeout, configurable
+	public static int getHttpTimeoutMinutes() {
+		return httpTimeoutMinutes == null ? HTTP_TIMEOUT_MINUTES : httpTimeoutMinutes;
+	}
+	public static void setHttpTimeoutMinutes(String minutes) {
+		if (minutes == null) {
+			Configuration.httpTimeoutMinutes = null;
+			return;
+		}
+		Configuration.httpTimeoutMinutes = Integer.parseInt(minutes);
 	}
 }

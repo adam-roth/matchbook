@@ -34,6 +34,7 @@ import au.com.suncoastpc.auth.util.AnnotationUtils;
 import au.com.suncoastpc.auth.util.Configuration;
 import au.com.suncoastpc.auth.util.Constants;
 import au.com.suncoastpc.auth.util.OverridableHttpRequest;
+import au.com.suncoastpc.auth.util.StringUtilities;
 
 /**
  * Provides a common starting-point for adding additional spring controllers to the webapp.  This class 
@@ -216,10 +217,18 @@ public abstract class BaseSpringController extends DispatcherServlet {
 	protected abstract String getPageNameForView(ModelAndView mv);
 	
 	private String getUrl(HttpServletRequest req) {
+		String paramString = "";
+		for (String paramName : req.getParameterMap().keySet()) {
+			if (! "".equals(paramString)) {
+				paramString += "&";
+			}
+			paramString += paramName + "=" + req.getParameter(paramName);
+		}
+		
 	    String reqUrl = req.getRequestURL().toString();  //base url
-	    String queryString = req.getQueryString();       //query params
-	    if (queryString != null) {
-	        reqUrl += "?"+queryString;
+	    //String queryString = req.getQueryString();       //query params		//FIXME:  only returns the first parameter for some reason; possible bug in OverridableHttpServletRequest?
+	    if (! StringUtilities.isEmpty(paramString)) {
+	    	reqUrl += "?" + paramString;
 	    }
 	    return reqUrl;
 	}

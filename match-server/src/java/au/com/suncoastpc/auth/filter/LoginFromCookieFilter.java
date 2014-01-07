@@ -10,6 +10,7 @@ import javax.servlet.FilterConfig;
 import javax.servlet.ServletException;
 import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
+import javax.servlet.annotation.WebFilter;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -21,6 +22,7 @@ import au.com.suncoastpc.auth.util.Constants;
 import au.com.suncoastpc.auth.util.CookieUtil;
 import au.com.suncoastpc.auth.util.types.UserState;
 
+@WebFilter("/*")
 public class LoginFromCookieFilter implements Filter {
 	private static final Logger LOG = Logger.getLogger(LoginFromCookieFilter.class);
 
@@ -35,7 +37,7 @@ public class LoginFromCookieFilter implements Filter {
 		HttpServletResponse httpResp = (HttpServletResponse)response;
 		
 		String cookieValue = CookieUtil.getCookieValue(Constants.PERSISTENT_LOGIN_COOKIE_NAME, httpReq);
-		if (cookieValue != null) {
+		if (cookieValue != null && httpReq.getSession().getAttribute(Constants.SESSION_USER_KEY) == null) {
 			try {
 				String[] parts = cookieValue.split("\\:");
 				String email = parts[0];

@@ -2,6 +2,7 @@ package au.com.suncoastpc.auth.util;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
 import java.util.ListIterator;
@@ -22,7 +23,7 @@ public class CircularArray<T> implements List<T> {
 	
 	public CircularArray(int numElements) {
 		this.numElements = numElements;
-		this.data = new ArrayList<T>(numElements);
+		this.data = Collections.synchronizedList(new ArrayList<T>(numElements));
 		this.currentIndex = 0;
 		this.size = 0;
 	}
@@ -62,20 +63,23 @@ public class CircularArray<T> implements List<T> {
 	
 	private int indexForElement(T element) {
 		int itemIndex = 0;
-		for (T elem : data) {
-			if (element.equals(elem)) {
-				break;
+		synchronized(this.data) {
+			for (T elem : data) {
+				if (element.equals(elem)) {
+					break;
+				}
+				itemIndex++;
 			}
-			itemIndex++;
 		}
-		
 		return itemIndex;
 	}
 	
 	public T instanceEqualTo(T object) {
-		for (T elem : this.data) {
-			if (object.equals(elem)) {
-				return elem;
+		synchronized(this.data) {
+			for (T elem : this.data) {
+				if (object.equals(elem)) {
+					return elem;
+				}
 			}
 		}
 		return null;

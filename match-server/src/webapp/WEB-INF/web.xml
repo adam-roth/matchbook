@@ -90,6 +90,18 @@
         </web-resource-collection>
         <auth-constraint />
     </security-constraint>
+    
+    <!-- Http session filter -->
+	<filter>
+		<filter-name>session</filter-name>
+		<filter-class>
+			au.com.suncoastpc.auth.filter.HttpSessionTimeoutFilter
+		</filter-class>
+	</filter>  
+    <filter-mapping>
+		<filter-name>session</filter-name>
+		<url-pattern>/*</url-pattern>
+	</filter-mapping>
 	
 	<!-- Sitemesh -->
 	<filter>
@@ -103,7 +115,7 @@
 		<url-pattern>/*</url-pattern>
 	</filter-mapping>
 	
-	<!-- Login filter -->
+	<!-- Login filter XXX:  login filter was acting weird, so it being called manually from inside the HttpSessionTimeoutFilter (HACK!!!)
 	<filter>
 		<filter-name>loginCookie</filter-name>
 		<filter-class>au.com.suncoastpc.auth.filter.LoginFromCookieFilter</filter-class>
@@ -112,6 +124,7 @@
 		<filter-name>loginCookie</filter-name>
 		<url-pattern>/*</url-pattern>
 	</filter-mapping>
+	-->
 	
 	<!-- Input Sanitization filter -->
 	<filter>

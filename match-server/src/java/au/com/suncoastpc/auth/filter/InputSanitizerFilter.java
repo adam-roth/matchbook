@@ -30,7 +30,7 @@ public class InputSanitizerFilter implements Filter {
 		//no work necessary
 	}
 
-	@SuppressWarnings("unchecked")
+	//@SuppressWarnings("unchecked")
 	@Override
 	public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
 		OverridableHttpRequest newRequest = new OverridableHttpRequest((HttpServletRequest)request);
