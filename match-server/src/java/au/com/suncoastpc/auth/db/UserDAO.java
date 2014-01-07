@@ -1,5 +1,8 @@
 package au.com.suncoastpc.auth.db;
 
+import java.util.Collection;
+import java.util.Collections;
+
 import javax.persistence.EntityManager;
 import javax.persistence.NoResultException;
 import javax.persistence.Query;
@@ -22,6 +25,38 @@ public class UserDAO {
 		}
 		catch (Exception unexpected) {
 			LOG.error("Unexpected exception when attempting to find user with e-mail=" + email);
+		}
+		
+		return result;
+	}
+	
+	@SuppressWarnings("unchecked")
+	public static Collection<User> findAll(EntityManager em) {
+		Collection<User> result = Collections.emptyList();
+		
+		try {
+			Query query = em.createNamedQuery("User.findAll");
+			result = query.getResultList();
+		}
+		catch (Exception e) {
+			LOG.error("Unexpected database error!", e);
+		}
+		
+		return result;
+	}
+	
+	public static Long countAll(EntityManager em) {
+		Long result = 0L;
+		
+		try {
+			Query query = em.createNamedQuery("User.countAll");
+			result = (Long)query.getSingleResult();
+		}
+		catch (NoResultException ignored) {
+			//just return 0
+		}
+		catch (Exception unexpected) {
+			LOG.error("Unexpected database error!", unexpected);
 		}
 		
 		return result;

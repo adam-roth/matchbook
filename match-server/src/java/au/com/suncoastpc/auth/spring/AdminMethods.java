@@ -93,7 +93,7 @@ public class AdminMethods extends BaseMethods {
 		return new ModelAndView("manageConfiguration");
 	}
 	
-	@SuppressWarnings("unchecked")
+	//@SuppressWarnings("unchecked")
 	public ModelAndView submitManageConfiguration(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		if (request.getParameter("resetConfiguration") != null) {
 			//set all settable Configuration fields back to null to restore their initial default value

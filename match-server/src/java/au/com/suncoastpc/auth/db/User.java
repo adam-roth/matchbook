@@ -32,6 +32,7 @@ import au.com.suncoastpc.match.db.Game;
 @Entity
 @Table(name="users")
 @NamedQueries({
+	@NamedQuery(name="User.countAll", query="SELECT COUNT(*) FROM User u"),
 	@NamedQuery(name="User.findAll", query="SELECT u FROM User u"),
 	@NamedQuery(name="User.findByEmail", query="SELECT u FROM User u WHERE u.email = :email")
 })
