@@ -50,8 +50,13 @@ public class AndroidMatchmaker extends Matchmaker {
 	            for (Enumeration<InetAddress> enumIpAddr = intf.getInetAddresses(); enumIpAddr.hasMoreElements();) {
 	                InetAddress inetAddress = enumIpAddr.nextElement();
 	                if (!inetAddress.isLoopbackAddress()) {
-	                	System.out.println("My local IP address is:  " + inetAddress.getHostAddress().toString());
-	                    return inetAddress.getHostAddress().toString();
+	                	String address = inetAddress.getHostAddress();
+	                	if (address.contains("%")) {
+	                		address = address.substring(0, address.indexOf("%"));
+	                	}
+	                	
+	                	System.out.println("My local IP address is:  " + address);
+	                    return address;
 	                }
 	            }
 	        }
