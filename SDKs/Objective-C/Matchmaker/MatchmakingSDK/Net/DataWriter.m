@@ -8,7 +8,7 @@
 
 #import "DataWriter.h"
 #import "SCMatchmaker.h"
-#import <SBJSON/SBJson.h>
+#import "NSObject+SimpleJson.h"
 #import "DataUtils.h"
 #import "SCMatchmakerDelegate.h"
 

@@ -8,7 +8,7 @@
 
 #import "SocketBridge.h"
 #import "DataUtils.h"
-#import <SBJSON/SBJson.h>
+#import "NSObject+SimpleJson.h"
 
 @implementation SocketBridge
 
@@ -24,10 +24,12 @@
             CFRelease(clientInput);
             CFRelease(serverOutput);
             closed = YES;
+            NSLog(@"Socketbridge streams closed!");
         }
     }
 }
 
+//FIXME:  breaks if socket is closed externally for any reason
 - (void) pipeServerToClient {
     while (! closed) {
         @autoreleasepool {

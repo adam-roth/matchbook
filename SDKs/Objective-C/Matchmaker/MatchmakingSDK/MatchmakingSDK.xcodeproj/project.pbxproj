@@ -30,7 +30,8 @@
 		830FA44D154FC9CA00708CCD /* NSString+JavaAPI.m in Sources */ = {isa = PBXBuildFile; fileRef = 830FA438154FC9CA00708CCD /* NSString+JavaAPI.m */; };
 		830FA44E154FC9CA00708CCD /* StringUtilities.h in Headers */ = {isa = PBXBuildFile; fileRef = 830FA439154FC9CA00708CCD /* StringUtilities.h */; };
 		830FA44F154FC9CA00708CCD /* StringUtilities.m in Sources */ = {isa = PBXBuildFile; fileRef = 830FA43A154FC9CA00708CCD /* StringUtilities.m */; };
-		830FA451154FC9CF00708CCD /* SBJSON.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 830FA450154FC9CF00708CCD /* SBJSON.framework */; };
+		E30AC948187C3FAB0091D0FC /* NSObject+SimpleJson.h in Headers */ = {isa = PBXBuildFile; fileRef = E30AC946187C3FAB0091D0FC /* NSObject+SimpleJson.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		E30AC949187C3FAB0091D0FC /* NSObject+SimpleJson.m in Sources */ = {isa = PBXBuildFile; fileRef = E30AC947187C3FAB0091D0FC /* NSObject+SimpleJson.m */; };
 		E33E0BE4185C7A0600586B87 /* DataReaderDelegate.h in Headers */ = {isa = PBXBuildFile; fileRef = E33E0BE3185C7A0600586B87 /* DataReaderDelegate.h */; };
 		E33E0BE6185C7A1A00586B87 /* DataWriterDelegate.h in Headers */ = {isa = PBXBuildFile; fileRef = E33E0BE5185C7A1A00586B87 /* DataWriterDelegate.h */; };
 /* End PBXBuildFile section */
@@ -62,7 +63,8 @@
 		830FA438154FC9CA00708CCD /* NSString+JavaAPI.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+JavaAPI.m"; sourceTree = "<group>"; };
 		830FA439154FC9CA00708CCD /* StringUtilities.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StringUtilities.h; sourceTree = "<group>"; };
 		830FA43A154FC9CA00708CCD /* StringUtilities.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StringUtilities.m; sourceTree = "<group>"; };
-		830FA450154FC9CF00708CCD /* SBJSON.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = SBJSON.framework; sourceTree = "<group>"; };
+		E30AC946187C3FAB0091D0FC /* NSObject+SimpleJson.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSObject+SimpleJson.h"; sourceTree = "<group>"; };
+		E30AC947187C3FAB0091D0FC /* NSObject+SimpleJson.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSObject+SimpleJson.m"; sourceTree = "<group>"; };
 		E33E0BE3185C7A0600586B87 /* DataReaderDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DataReaderDelegate.h; sourceTree = "<group>"; };
 		E33E0BE5185C7A1A00586B87 /* DataWriterDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DataWriterDelegate.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -73,7 +75,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				830FA413154FC98800708CCD /* Foundation.framework in Frameworks */,
-				830FA451154FC9CF00708CCD /* SBJSON.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -100,7 +101,6 @@
 		830FA411154FC98800708CCD /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				830FA450154FC9CF00708CCD /* SBJSON.framework */,
 				830FA412154FC98800708CCD /* Foundation.framework */,
 			);
 			name = Frameworks;
@@ -161,6 +161,8 @@
 		830FA434154FC9CA00708CCD /* Utils */ = {
 			isa = PBXGroup;
 			children = (
+				E30AC946187C3FAB0091D0FC /* NSObject+SimpleJson.h */,
+				E30AC947187C3FAB0091D0FC /* NSObject+SimpleJson.m */,
 				830FA435154FC9CA00708CCD /* Base64.h */,
 				830FA436154FC9CA00708CCD /* Base64.m */,
 				830FA437154FC9CA00708CCD /* NSString+JavaAPI.h */,
@@ -181,6 +183,7 @@
 				830FA43B154FC9CA00708CCD /* SCMatch.h in Headers */,
 				830FA43D154FC9CA00708CCD /* SCMatchmaker.h in Headers */,
 				830FA43F154FC9CA00708CCD /* SCMatchmakerDelegate.h in Headers */,
+				E30AC948187C3FAB0091D0FC /* NSObject+SimpleJson.h in Headers */,
 				830FA440154FC9CA00708CCD /* MatchAPI.h in Headers */,
 				830FA442154FC9CA00708CCD /* DataReader.h in Headers */,
 				830FA444154FC9CA00708CCD /* DataUtils.h in Headers */,
@@ -310,6 +313,7 @@
 				830FA447154FC9CA00708CCD /* DataWriter.m in Sources */,
 				830FA449154FC9CA00708CCD /* SocketBridge.m in Sources */,
 				830FA44B154FC9CA00708CCD /* Base64.m in Sources */,
+				E30AC949187C3FAB0091D0FC /* NSObject+SimpleJson.m in Sources */,
 				830FA44D154FC9CA00708CCD /* NSString+JavaAPI.m in Sources */,
 				830FA44F154FC9CA00708CCD /* StringUtilities.m in Sources */,
 			);
