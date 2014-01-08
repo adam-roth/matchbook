@@ -13,8 +13,9 @@ import au.com.suncoastpc.match.api.Matchmaker;
 import au.com.suncoastpc.match.api.MatchmakerClient;
 
 /**
- * Can be used to provide Matchmaking services for Android applications.  Note that this 
- * will use http://192.168.1.35:8080/ap/ as its matchmaking API server.  You will need 
+ * Can be used to provide Matchmaking services for Android applications.  
+ * 
+ * Note that this will use http://192.168.1.35:8080/ap/ as its matchmaking API server.  You will need 
  * to set up/find your own server and register your application on it (using a web browser) 
  * in order to get correct 'secret' key to pass to the matchmaker constructor.
  * 
@@ -23,6 +24,7 @@ import au.com.suncoastpc.match.api.MatchmakerClient;
  * @author Adam
  */
 public class AndroidMatchmaker extends Matchmaker {
+	private static final String SERVER_ADDRESS = "http://192.168.1.35:8080/ap/";  //XXX:  we could also use a the 'au.com.suncoastpc.matchbook.server' property to specify this
 	
 	private TelephonyManager tm;
 	
@@ -36,7 +38,7 @@ public class AndroidMatchmaker extends Matchmaker {
 	 * @param client the client to notify about match-related events, may not be null.  
 	 */
 	public AndroidMatchmaker(TelephonyManager tm, String app, String secret, MatchmakerClient client) {
-		super(null, app, secret, client);
+		super(null, app, secret, client, SERVER_ADDRESS);
 		this.tm = tm;
 	}
 	
