@@ -4,6 +4,8 @@
 
 ### About
 
+![For real.](https://raw.github.com/adam-roth/matchbook/master/running_small.jpg)
+
 Matchbook is a lightweight and platform-agnostic matchmaking solution, intended for use in mobile applications (think games that require near-real-time, relatively-low-latency, persistent communications between two or more client devices).  
 
 At its core is a server component, which provides a JSON-based webservice allowing clients to find, create, and join matches.   The server also acts as a proxy/relay when necessary, allowing client devices to tunnel through any firewalls that might exist between them.  
@@ -18,7 +20,6 @@ And to be clear, when I say "span any number of platforms" I don't just mean you
 
 Matchbook.  It's platform-agnostic.  For real.
 
-![For real.](https://raw.github.com/adam-roth/matchbook/master/running_small.jpg)
 
 ### Getting Started - Server
 
