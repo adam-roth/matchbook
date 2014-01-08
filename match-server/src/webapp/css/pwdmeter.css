@@ -1,0 +1,77 @@
+#score {
+	color: #000;
+	font-size: 85%;
+	position:absolute;
+	text-align: center;
+	width: 100px;
+	z-index: 10;
+}
+#score,#rating,#standards {
+	font-weight: bold;
+}
+#scorebar {
+	background-image: url(../images/bg_strength_gradient.jpg);
+	background-repeat: no-repeat;
+	background-position: 0 0;
+	position:absolute;
+	width: 100px;
+	z-index: 0;
+}
+#scorebarBorder {
+	background: #333;
+	border: 1px #000 solid;
+	height: 16px;
+	margin-bottom: 2px;
+	width: 100px;
+}
+.bold {
+	font-weight: bold;
+}
+.clearNone {
+	clear: none;
+}
+.floatRight {
+	float: right;
+}
+.floatLeft {
+	float: left;
+}
+.hide {
+	display: none;
+}
+.imgLegend {
+	clear: left !important;
+	float: left !important;
+	position: relative !important;
+	margin-bottom: -3px !important;
+	margin-right: 5px !important;
+}
+.inline {
+	display: inline;
+}
+.italic {
+	font-style: italic;
+}
+.noPad {
+	padding: 0;
+}
+.show {
+	display: inline !important;
+}
+.txtLg {
+	font-size: 125%;
+}
+.txtSmall {
+	font-size: 75%;
+}
+.txtCenter {
+	text-align: center;
+}
+.txtRight {
+	text-align: right;
+}
+div.xtend {
+	clear: both !important; 
+	line-height: 0; 
+	height: 0;
+}

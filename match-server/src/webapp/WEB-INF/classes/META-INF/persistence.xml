@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<persistence version="1.0" xmlns="http://java.sun.com/xml/ns/persistence"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://java.sun.com/xml/ns/persistence
+    http://java.sun.com/xml/ns/persistence/persistence_1_0.xsd">
+  <persistence-unit name="match_prod">
+    <provider>org.hibernate.ejb.HibernatePersistence</provider>
+    <exclude-unlisted-classes>false</exclude-unlisted-classes>
+    <properties>
+      <property name="hibernate.archive.autodetection" value="class"/>
+      <property name="hibernate.dialect" value="org.hibernate.dialect.MySQLDialect"/>
+      <property name="hibernate.connection.driver_class" value="com.mysql.jdbc.Driver"/>
+      <property name="hibernate.connection.url" value="jdbc:mysql://127.0.0.1:3306/matchmaking"/>
+      <property name="hibernate.connection.username" value="root"/>
+      <property name="hibernate.connection.password" value="root"/>
+      <property name="hibernate.show.sql" value="false"/>
+      <property name="hibernate.c3p0.acquire_increment" value="1"/> 
+	  <property name="hibernate.c3p0.idle_test_period" value="10"/>
+	  <property name="hibernate.c3p0.max_size" value="20"/>
+	  <property name="hibernate.c3p0.max_statements" value="40"/>
+	  <property name="hibernate.c3p0.min_size" value="1"/> 
+	  <property name="hibernate.c3p0.timeout" value="30"/>
+    </properties>
+  </persistence-unit>
+  <persistence-unit name="match_devel">
+    <provider>org.hibernate.ejb.HibernatePersistence</provider>
+    <exclude-unlisted-classes>false</exclude-unlisted-classes>
+    <properties>
+      <property name="hibernate.archive.autodetection" value="class"/>
+      <property name="hibernate.dialect" value="org.hibernate.dialect.MySQLDialect"/>
+      <property name="hibernate.connection.driver_class" value="com.mysql.jdbc.Driver"/>
+      <property name="hibernate.connection.url" value="jdbc:mysql://127.0.0.1:3306/matchmaking"/>
+      <property name="hibernate.connection.username" value="root"/>
+      <property name="hibernate.connection.password" value="root"/>
+      <property name="hibernate.hbm2ddl.auto" value="update"/>
+      <property name="hibernate.show.sql" value="true"/>
+      <property name="hibernate.c3p0.acquire_increment" value="1"/> 
+	  <property name="hibernate.c3p0.idle_test_period" value="10"/>
+	  <property name="hibernate.c3p0.max_size" value="20"/>
+	  <property name="hibernate.c3p0.max_statements" value="40"/>
+	  <property name="hibernate.c3p0.min_size" value="1"/> 
+	  <property name="hibernate.c3p0.timeout" value="30"/>
+    </properties>
+  </persistence-unit>
+</persistence>

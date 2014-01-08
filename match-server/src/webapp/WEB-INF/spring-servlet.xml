@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE beans PUBLIC "-//SPRING//DTD BEAN//EN" "http://www.springframework.org/dtd/spring-beans.dtd">
+<beans>
+	<!-- Provides access to basic authentication-related methods (login, register, reset password, etc.) -->
+    <bean id="authController" class="au.com.suncoastpc.auth.spring.AuthMethods" >
+    	<property name="methodNameResolver">
+			<ref bean="transactionHandlerMethodResolver"/>
+		</property>
+	</bean>
+	
+	<!-- Provides access to administrative functionality/tools -->
+	<bean id="adminController" class="au.com.suncoastpc.auth.spring.AdminMethods" >
+    	<property name="methodNameResolver">
+			<ref bean="transactionHandlerMethodResolver"/>
+		</property>
+	</bean>
+	
+	<!-- Provides access to user functionality/tools -->
+	<bean id="userController" class="au.com.suncoastpc.match.spring.UserMethods" >
+    	<property name="methodNameResolver">
+			<ref bean="transactionHandlerMethodResolver"/>
+		</property>
+	</bean>
+	
+	<!-- Provides access to user functionality/tools -->
+	<bean id="apiController" class="au.com.suncoastpc.match.spring.ApiMethods" >
+    	<property name="methodNameResolver">
+			<ref bean="transactionHandlerMethodResolver"/>
+		</property>
+	</bean>
+	
+	<bean id="transactionHandlerMethodResolver" 
+		class="org.springframework.web.servlet.mvc.multiaction.ParameterMethodNameResolver">
+		<property name="paramName">
+			<value>method</value>			
+		</property>	
+		<property name="defaultMethodName">
+			<value>indexPage</value>
+		</property>	
+	</bean>		
+	
+	<bean id="viewResolver" class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+		<property name="viewClass" value="org.springframework.web.servlet.view.JstlView"/>
+		<property name="prefix" value="/WEB-INF/views/"/>		
+		<property name="suffix" value=".jsp"/>
+	</bean>	   
+	
+	<!-- Maps between incoming URL's and controller instances -->
+	<bean id="simpleUrlMapping" class="org.springframework.web.servlet.handler.SimpleUrlHandlerMapping">
+		<property name="mappings">
+			<props>				
+				<prop key="/auth*">authController</prop>
+				<prop key="/auth/*">authController</prop>
+				<prop key="/admin*">adminController</prop>
+				<prop key="/admin/*">adminController</prop>
+				<prop key="/user*">userController</prop>
+				<prop key="/user/*">userController</prop>
+				<prop key="/api*">apiController</prop>
+				<prop key="/api/*">apiController</prop>
+			</props>			
+		</property>
+		<property name="interceptors">
+		  <list>
+		    <ref bean="localeChangeInterceptor" />
+		  </list>
+		</property>		
+	</bean>	  
+	
+	<bean id="exceptionResolver" class="org.springframework.web.servlet.handler.SimpleMappingExceptionResolver">
+	   	<property name="exceptionMappings">
+			<props>
+		   		<prop key="java.lang.Throwable">error</prop>
+	       	</props>
+	   	</property>
+	</bean>
+	
+	<!-- Provides localization support -->
+	<bean id="messageSource"
+		class="org.springframework.context.support.ResourceBundleMessageSource">
+		<property name="basename">
+			<value>localization/messages</value>
+		</property>
+	</bean>
+	
+	<bean id="localeResolver" class="org.springframework.web.servlet.i18n.CookieLocaleResolver" />	
+	<bean id="localeChangeInterceptor" class="org.springframework.web.servlet.i18n.LocaleChangeInterceptor" />	
+</beans>

@@ -1,0 +1,91 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<groupId>au.com.suncoastpc</groupId>
+	<artifactId>match-java-sdk</artifactId>
+	<version>0.01</version>
+	<packaging>jar</packaging>
+	<name>Matchbook Java SDK</name>
+	<description>
+		Matchbook Java SDK.  Provides a generic Java SDK for the matchmaking server.  Can be used in Android applications, or anywhere else that Java can be used.
+	</description>
+
+	<build>
+		<sourceDirectory>src/java</sourceDirectory>
+		<testSourceDirectory>src/test</testSourceDirectory>
+		<plugins>	
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<version>2.3.2</version>
+				<configuration>
+					<source>1.6</source>
+					<target>1.6</target>
+				</configuration>
+			</plugin>
+			<plugin>
+    			<artifactId>maven-assembly-plugin</artifactId>
+    			<executions>
+      				<execution>
+      					<phase>package</phase>
+     				  	<goals>
+          			 		<goal>attached</goal>
+        				</goals>
+      				</execution>
+    			</executions>
+    			<configuration>
+      				<descriptorRefs>
+        				<descriptorRef>jar-with-dependencies</descriptorRef>
+      				</descriptorRefs>
+    			</configuration>
+  			</plugin>
+		</plugins>
+	</build>
+	<reporting>
+		<plugins>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-javadoc-plugin</artifactId>
+				<version>2.8</version>
+			</plugin>
+			<plugin>
+				<groupId>org.codehaus.mojo</groupId>
+				<artifactId>findbugs-maven-plugin</artifactId>
+				<version>2.3.3</version>
+				<configuration>
+					<threshold>Normal</threshold>   <!-- High, Normal, Low, Exp, Ignore -->
+					<effort>Default</effort>        <!-- Min, Default, Max -->
+				</configuration>
+			</plugin>
+		</plugins>
+	</reporting>
+	<repositories>
+		<repository>
+			<id>codehaus-snapshots</id>
+			<name>Maven Codehaus Snapshots</name>
+			<url>http://snapshots.maven.codehaus.org/maven2/</url>
+		</repository>
+		<repository>
+			<id>jboss-maven2</id>
+			<name>JBoss Maven Repo</name>
+			<url>http://repository.jboss.org/maven2/</url>
+		</repository>
+		<repository>
+			<id>java-maven2</id>
+			<name>Java.net Maven Repo</name>
+			<url>http://download.java.net/maven/2/</url>
+		</repository>
+	</repositories>
+	<dependencies>
+		<dependency>
+    		<groupId>com.googlecode.json-simple</groupId>
+    		<artifactId>json-simple</artifactId>
+    		<version>1.1</version>
+		</dependency>
+	</dependencies>
+	<distributionManagement>
+	</distributionManagement>
+	<profiles>
+	</profiles>	
+</project>
+
