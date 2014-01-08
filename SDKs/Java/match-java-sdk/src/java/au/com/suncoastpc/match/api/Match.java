@@ -22,7 +22,7 @@ import au.com.suncoastpc.match.api.net.DataUtils;
 //FIXME:  if a SERVER socket disconnected, make sure the game is removed from the server
 
 public class Match {
-	protected static final String INTERNAL_DATA_KEY = "__iappsMatchData";
+	protected static final String INTERNAL_DATA_KEY = "__MatchData";
 	private static final String BROADCAST = "broadcast";
 	private static final String RELAY = "relay";
 	private static final String INTERNAL = "internal";
@@ -49,6 +49,7 @@ public class Match {
 	private ServerSocket listenSocket;
 	private Map<String, DataWriter> playerConnections;		//FIXME:  keep track of the writers
 	
+	@SuppressWarnings("unused")
 	private Match() {
 		//default constructor not allowed
 	}
@@ -349,12 +350,12 @@ public class Match {
 	
 	class ServerThread extends Thread {
 		private ServerSocket server;
-		private String connectionPassword;
+		//private String connectionPassword;
 		private Matchmaker matchmaker;
 		
 		public ServerThread(ServerSocket socket, String password, Matchmaker matchmaker) {
 			this.server = socket;
-			this.connectionPassword = password;
+			//this.connectionPassword = password;
 			this.matchmaker = matchmaker;
 		}
 		

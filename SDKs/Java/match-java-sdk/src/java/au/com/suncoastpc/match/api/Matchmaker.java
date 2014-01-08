@@ -20,8 +20,10 @@ public class Matchmaker {
 	protected static final String SERVER_ADDRESS;
 	
 	static {
-		SERVER_ADDRESS = System.getProperty("au.net.iapps.match.url", /*"http://localhost:44444/ap/""http://server.iapps.net.au:44444/ap/"*/"http://pokemunity.com:44444/ap/");
+		SERVER_ADDRESS = System.getProperty("au.com.suncoastpc.matchbook.server", "http://localhost:8080/ap/");
 	}
+	
+	protected String customServerAddress;
 	
 	protected String uuid;
 	protected String app;
@@ -30,6 +32,7 @@ public class Matchmaker {
 	
 	protected Map<String, MatchPingThread> pingers;
 	
+	@SuppressWarnings("unused")
 	private Matchmaker() {
 		//default constructor, should not be used
 	}
@@ -41,6 +44,12 @@ public class Matchmaker {
 	
 	protected String getUuid() {
 		return null;
+	}
+	
+	public Matchmaker(String uuid, String app, String secret, MatchmakerClient client, String serverAddress) {
+		this(uuid, app, secret, client);
+		
+		this.customServerAddress = serverAddress;
 	}
 	
 	public Matchmaker(String uuid, String app, String secret, MatchmakerClient client) {
@@ -361,9 +370,9 @@ public class Matchmaker {
 		return result;
 	}
 	
-	protected static JSONObject doRequest(MatchApi method, Map<String, String> params) {
+	protected JSONObject doRequest(MatchApi method, Map<String, String> params) {
 		try {
-			String url = method.getApiUrl(SERVER_ADDRESS, params); 
+			String url = method.getApiUrl(serverAddress(), params); 
 			InputStream response = new URL(url).openStream();
 			JSONObject result =  readFully(response);
 			
@@ -376,6 +385,22 @@ public class Matchmaker {
 			ignored.printStackTrace();
 		}
 		return null;
+	}
+	
+	private String serverAddress() {
+		String address = customServerAddress != null ? customServerAddress : SERVER_ADDRESS;
+		if (! address.endsWith("/ap/")) {
+			System.out.println("WARN:  The provided Matchbook server URL does not appear valid; url=" + address); 
+			if (address.endsWith("/ap")) {
+				address += "/";
+			}
+			else {
+				address += "/ap/";
+			}
+			System.out.println("WARNL  Natchbook will attempt to use the following server URL:  " + address);
+		}
+		
+		return address;
 	}
 	
 	private static JSONObject readFully(InputStream stream) {

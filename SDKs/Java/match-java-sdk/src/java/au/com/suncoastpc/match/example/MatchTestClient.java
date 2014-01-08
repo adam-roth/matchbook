@@ -18,7 +18,7 @@ public class MatchTestClient implements MatchmakerClient {
 		new MatchTestClient().runTest();
 	}
 	
-	@SuppressWarnings("unchecked")
+	@SuppressWarnings({ "unchecked", "unused" })
 	private void runTest() throws Exception {
 		//initialize the matchmaker
 		//Matchmaker.initialize(UUID, GAME, GAME_PRIVATE);
