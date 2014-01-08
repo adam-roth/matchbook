@@ -18,6 +18,8 @@ And to be clear, when I say "span any number of platforms" I don't just mean you
 
 Matchbook.  It's platform-agnostic.  For real.
 
+![For real.](https://raw.github.com/adam-roth/matchbook/master/running_small.jpg)
+
 ### Getting Started - Server
 
 ### Getting Started - iOS
