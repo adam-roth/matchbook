@@ -9,7 +9,7 @@
 #import "SCMatch.h"
 #import "SCMatchmaker.h"
 #import "DataUtils.h"
-#import <SBJSON/SBJson.h>
+#import "NSObject+SimpleJson.h"
 #import "DataReader.h"
 #import "DataWriter.h"
 #import "SCMatchmakerDelegate.h"

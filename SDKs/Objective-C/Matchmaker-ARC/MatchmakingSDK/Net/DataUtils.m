@@ -7,7 +7,7 @@
 //
 
 #import "DataUtils.h"
-#import <SBJSON/SBJson.h>
+#import "NSObject+SimpleJson.h"
 
 #define ONE_BYTE 0x000000FF
 #define MAX_PACKET_SIZE 262144
@@ -120,6 +120,8 @@
 }
 
 + (int) fillBuffer: (NSMutableData*)buffer fromStream: (CFReadStreamRef)stream {
+    CFRetain(stream);       //FIXME:  app will crash without this retain and the corresponding release below
+    
     int totalRead = 0;
     int target = [buffer length];
     unsigned char* readBuffer = malloc(sizeof(unsigned char) * [buffer length]);
@@ -152,6 +154,8 @@
     
     [buffer setData:[NSData dataWithBytes:readBuffer length:totalRead]];
     free(readBuffer);
+    CFRelease(stream);
+    
     return totalRead;
 }
 

@@ -8,7 +8,7 @@
 
 #import "SocketBridge.h"
 #import "DataUtils.h"
-#import <SBJSON/SBJson.h>
+#import "NSObject+SimpleJson.h"
 
 @implementation SocketBridge
 
