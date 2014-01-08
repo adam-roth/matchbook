@@ -1,4 +1,4 @@
-package au.net.iapps.matchmaking.example;
+package au.com.suncoastpc.matchmaking.example;
 
 import java.net.InetAddress;
 import java.net.NetworkInterface;
@@ -14,13 +14,11 @@ import au.net.iapps.match.api.MatchmakerClient;
 
 /**
  * Can be used to provide Matchmaking services for Android applications.  Note that this 
- * will use http://server.iapps.net.au:44444 as its matchmaking API server.  You will need 
- * to register your application on that server (using a web browser) in order to get the 
- * 'secret' key to pass to the matchmaker constructor.
+ * will use http://192.168.1.35:8080/ap/ as its matchmaking API server.  You will need 
+ * to set up/find your own server and register your application on it (using a web browser) 
+ * in order to get correct 'secret' key to pass to the matchmaker constructor.
  * 
  * Most of the functionality of this class is inherited from the core Java matchmaking SDK.
- * 
- * see 'https://server.iapps.net.au:444/svn/MatchmakingServer/trunk/SDKs/Java/match-java-sdk' for more details.
  * 
  * @author Adam
  */

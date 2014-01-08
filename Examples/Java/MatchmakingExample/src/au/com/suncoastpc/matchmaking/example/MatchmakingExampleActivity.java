@@ -1,4 +1,4 @@
-package au.net.iapps.matchmaking.example;
+package au.com.suncoastpc.matchmaking.example;
 
 import org.json.simple.JSONObject;
 
@@ -20,8 +20,8 @@ import au.net.iapps.match.api.Matchmaker;
 import au.net.iapps.match.api.MatchmakerClient;
 
 public class MatchmakingExampleActivity extends Activity implements MatchmakerClient {
-	private static final String APP_ID = "au.net.iapps.MatchmakingExample";
-	private static final String API_KEY = "a3a1066147604082";
+	private static final String APP_ID = "au.com.suncoastpc.MatchmakingExample";
+	private static final String API_KEY = "ef20a2a065e345d0";
 	private static final int NUM_PLAYERS = 4;
 	
 	private Matchmaker matchmaker;
