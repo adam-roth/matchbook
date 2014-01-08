@@ -11,7 +11,7 @@
 #import <MatchmakingSDK/SCMatchmaker.h>
 
 //au.com.suncoastpc.MatchmakingExample
-#define MATCHMAKER_KEY @"6308ca8e19634e2a"
+#define MATCHMAKER_KEY @"ef20a2a065e345d0"
 
 #define NUM_PLAYERS 4
 #define LABEL_SIZE 44

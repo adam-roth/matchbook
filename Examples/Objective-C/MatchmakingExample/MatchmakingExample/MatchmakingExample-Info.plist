@@ -33,7 +33,7 @@
 		<string>armv7</string>
 	</array>
 	<key>au.com.suncoastpc.matchbook.server</key>
-	<string>http://192.168.1.127:8080/ap/</string>
+	<string>http://192.168.1.35:8080/ap/</string>
 	<key>UISupportedInterfaceOrientations</key>
 	<array>
 		<string>UIInterfaceOrientationPortrait</string>
