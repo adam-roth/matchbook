@@ -9,8 +9,8 @@ import java.util.UUID;
 import android.provider.Settings;
 import android.telephony.TelephonyManager;
 import android.util.Log;
-import au.net.iapps.match.api.Matchmaker;
-import au.net.iapps.match.api.MatchmakerClient;
+import au.com.suncoastpc.match.api.Matchmaker;
+import au.com.suncoastpc.match.api.MatchmakerClient;
 
 /**
  * Can be used to provide Matchmaking services for Android applications.  Note that this 

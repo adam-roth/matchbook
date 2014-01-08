@@ -15,9 +15,9 @@ import android.view.View.OnClickListener;
 import android.view.ViewGroup.LayoutParams;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-import au.net.iapps.match.api.Match;
-import au.net.iapps.match.api.Matchmaker;
-import au.net.iapps.match.api.MatchmakerClient;
+import au.com.suncoastpc.match.api.Match;
+import au.com.suncoastpc.match.api.Matchmaker;
+import au.com.suncoastpc.match.api.MatchmakerClient;
 
 public class MatchmakingExampleActivity extends Activity implements MatchmakerClient {
 	private static final String APP_ID = "au.com.suncoastpc.MatchmakingExample";
