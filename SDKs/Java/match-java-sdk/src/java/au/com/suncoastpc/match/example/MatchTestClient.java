@@ -1,10 +1,10 @@
-package au.net.iapps.match.example;
+package au.com.suncoastpc.match.example;
 
 import org.json.simple.JSONObject;
 
-import au.net.iapps.match.api.LocalTestMatchmaker;
-import au.net.iapps.match.api.Match;
-import au.net.iapps.match.api.MatchmakerClient;
+import au.com.suncoastpc.match.api.LocalTestMatchmaker;
+import au.com.suncoastpc.match.api.Match;
+import au.com.suncoastpc.match.api.MatchmakerClient;
 
 public class MatchTestClient implements MatchmakerClient {
 	private static final String GAME = "test.test";

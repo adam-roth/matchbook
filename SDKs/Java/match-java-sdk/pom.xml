@@ -1,13 +1,13 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
 	<modelVersion>4.0.0</modelVersion>
-	<groupId>au.net.iapps</groupId>
+	<groupId>au.com.suncoastpc</groupId>
 	<artifactId>match-java-sdk</artifactId>
 	<version>0.01</version>
 	<packaging>jar</packaging>
-	<name>Matchmaking Java SDK</name>
+	<name>Matchbook Java SDK</name>
 	<description>
-		Matchmaking Java SDK.  Provides a generic Java SDK for the matchmaking server.
+		Matchbook Java SDK.  Provides a generic Java SDK for the matchmaking server.  Can be used in Android applications, or anywhere else that Java can be used.
 	</description>
 
 	<build>
@@ -74,16 +74,6 @@
 			<id>java-maven2</id>
 			<name>Java.net Maven Repo</name>
 			<url>http://download.java.net/maven/2/</url>
-		</repository>
-		<repository>
-			<id>marketcetera-maven</id>
-			<name>Marketcetera Maven Repo</name>
-			<url>http://repo.marketcetera.org/maven/</url>
-		</repository>
-		<repository>
-			<id>urlrewrite-maven</id>
-			<name>Urlrewrite Maven Repo</name>
-			<url>https://hypobytes.com/maven/</url>
 		</repository>
 	</repositories>
 	<dependencies>

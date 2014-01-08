@@ -1,4 +1,4 @@
-package au.net.iapps.match.api.net;
+package au.com.suncoastpc.match.api.net;
 
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;

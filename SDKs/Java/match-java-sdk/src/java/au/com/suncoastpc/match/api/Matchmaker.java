@@ -1,4 +1,4 @@
-package au.net.iapps.match.api;
+package au.com.suncoastpc.match.api;
 
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
@@ -12,8 +12,8 @@ import java.util.Map;
 import org.json.simple.JSONObject;
 import org.json.simple.JSONValue;
 
-import au.net.iapps.match.api.net.DataUtils;
-import au.net.iapps.match.util.StringUtilities;
+import au.com.suncoastpc.match.api.net.DataUtils;
+import au.com.suncoastpc.match.util.StringUtilities;
 
 
 public class Matchmaker {

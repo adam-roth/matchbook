@@ -1,10 +1,10 @@
-package au.net.iapps.match.api;
+package au.com.suncoastpc.match.api;
 
 import java.util.Map;
 
 import org.json.simple.JSONObject;
 
-import au.net.iapps.match.util.StringUtilities;
+import au.com.suncoastpc.match.util.StringUtilities;
 
 /**
  * A Matchmaker that allows multiple distinct client UUID's within a single running JVM instance.  This can be used to

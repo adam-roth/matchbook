@@ -1,8 +1,8 @@
-package au.net.iapps.match.api;
+package au.com.suncoastpc.match.api;
 
 import java.util.Map;
 
-import au.net.iapps.match.util.StringUtilities;
+import au.com.suncoastpc.match.util.StringUtilities;
 
 //XXX:  package access intentional
 enum MatchApi {

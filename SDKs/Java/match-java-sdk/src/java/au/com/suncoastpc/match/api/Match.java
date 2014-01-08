@@ -1,4 +1,4 @@
-package au.net.iapps.match.api;
+package au.com.suncoastpc.match.api;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -15,7 +15,7 @@ import java.util.Set;
 
 import org.json.simple.JSONObject;
 
-import au.net.iapps.match.api.net.DataUtils;
+import au.com.suncoastpc.match.api.net.DataUtils;
 
 //FIXME:  a match should have an inactgivity timeout both locally and on the server
 //FIXME:  if a PLAYER socket disconnects make sure the server is informed that a palyer has left
