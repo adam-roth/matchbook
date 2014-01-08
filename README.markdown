@@ -40,7 +40,7 @@ For the sake of simplicity, you may consider all matchbook code to be licensed u
 
 - [x] Import code
 - [x] About
-- [ ] Screenshot(s)
+- [x] Screenshot(s)/Photo(s)
 - [ ] Server overview/setup
 - [ ] iOS overview/setup
 - [ ] Android overview/setup
