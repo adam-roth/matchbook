@@ -23,7 +23,141 @@ Matchbook.  It's platform-agnostic.  For real.
 
 ### Getting Started - Server
 
+First, make sure you have the prerequisites installed for building and running the server:
+
+* Java 6+
+* Maven 2+
+* MySQL 5+ (or any other database that JDBC supports)
+
+Next, grab a copy of the code under '/match-server' and edit the 'pom.xml' file in the project root directory to configure your server options.   At a minimum, you'll want to check the 'systemProperties' section, and the values of the following entries (note that if you have your own standalone Servlet container than you intend to deploy to, you can skip this step):
+
+```xml
+<au.com.suncoastpc.db.name>match_devel</au.com.suncoastpc.db.name>
+<au.com.suncoastpc.server.hostname>localhost</au.com.suncoastpc.server.hostname>
+<au.com.suncoastpc.server.port>8080</au.com.suncoastpc.server.port>
+```
+
+The first option specifies the **persistence unit**, as defined in 'persistence.xml' that the server should use.  More on that later.  
+
+The second option specifies the hostname that will be used for the server.  For development purposes, 'localhost' is fine.  Though obviously for an actual deployment you'll want to use your server's public hostname here.
+
+And the third option specifies the port the server should run on.  8080 is the default value, though of course you can specify any port you wish.  
+
+Also check the 'properties' section that immediately follows the 'systemProperties' section, and ensure that the value of 'cargo.servlet.port' matches whatever value you have put for 'au.com.suncoastpc.server.port'.
+
+The system properties defined in the default 'pom.xml' file are not the only options supported by matchbook.  Here is a complete overview:
+
+<table>
+<tr><th> Property Name </th><th> Description </th><th> Default Value </th></tr>
+<tr><td> au.com.suncoastpc.db.name </td><td> The name of the persistence-unit that the server should use to access the database; persistence units are defined in 'persistence.xml'. </td><td> match_devel </td></tr>
+<tr><td> au.com.suncoastpc.server.hostname </td><td> The hostname for this server; this is used when generating links in e-mails, etc. </td><td> localhost </td></tr>
+<tr><td> au.com.suncoastpc.server.port </td><td> The port for this server; this is used when generating links in e-mails, and does not affect the port that the server actually binds to. </td><td> 8080 </td></tr>
+<tr><td> au.com.suncoastpc.server.protocol </td><td> The protocol the server uses (HTTP, HTTPS, etc.); this is used when generating links in e-mails. </td><td> http </td></tr>
+<tr><td> au.com.suncoastpc.server.email.local </td><td> A flag which indicates whether or not 'localhost' is a valid destination for outgoing SMTP messages (i.e. whether or not something like Postfix is running locally). </td><td> false </td></tr>
+<tr><td> au.com.suncoastpc.server.email.admin </td><td> The e-mail address to use when sending outbound system e-mails. </td><td> admin@suncoastpc.com.au </td></tr>
+<tr><td> au.com.suncoastpc.server.email.admin.name </td><td> The display name to use when sending outbound system e-mails. </td><td> Matchbook Admin </td></tr>
+<tr><td> au.com.suncoastpc.profiling.enabled </td><td> A flag indicating whether or not performance information should be logged to the console. </td><td> true </td></tr>
+<tr><td> au.com.suncoastpc.server.http.timeout </td><td> The HTTP session timeout to use, in minutes. </td><td> 120 </td></tr>
+</table>
+
+Note that if you are using your own standalone servlet container, you will need to ensure that you set the desired values for the above system properties as part of your servlet container's startup scripts.
+
+Once you have your system properties set up, you should confirm your database connection settings.   To do this, open the 'src/webapp/WEB-INF/classes/META-INF/persistence.xml' file.  This is where the persistence units are defined.  There are two persistence units defined by default; 'match_prod' and 'match_devel'.  
+
+In any case, whether you use one of the predefined persistence units or add your own, you'll want to ensure that the dialect, driver class, and connection URL are all correct for your setup (the default settings assume a local MySQL database).  You'll also want to update the database username and password as appropriate for your system.  
+
+Once you're happy with the settings in persistence XML, all you need to do is ensure a blank database exists with the specified name (so for MySQL, using the default database name, you simple need to run `CREATE DATABASE matchmaking;`).  
+
+Now you're ready to fire up the server!  To do this simply run the provided 'startServer.sh' script (or 'startServer.bat' if you are on Windows).  This will build the webapp, and deploy it to an embedded Tomcat instance using Cargo.  
+
+Alternately, if you are using a standalone servlet container, you can run 'mvn clean install' to build the webapp and then manually deploy the WAR file that is created under '/target' to your servlet container of choice.  
+
+Visit the running server in a web browser (by pointing your browser at http(s)://\<hostname\>:\<port\>; so http://localhost:8080 when using the default configuration options).  Because this is the first visit to matchbook, you will be prompted to provide an admin password.  Do so (and _remember_ what password you pick, since you can't recover it if you lose it), and you will be logged in to the server.  
+
+Now all that's left to do is add a game so that you can get an API key to use in your mobile app(s).  To do this, enter your application's identifier/bundle-id (i.e. something like 'com.\<your company\>.SuperAwesomeGame') and press the 'Add Game' button.  
+
+Your button-clicking skills will be rewarded with a private-key, which you can copy/paste into your native app(s), as discussed in the next section.    
+
+
 ### Getting Started - iOS
+
+The simplest way to get started is to grab the iOS example application, located under '/Examples/Objective-C/MatchmakingExample'.  This project includes everything you need to familiarize yourself with the Matchbook iOS SDK, including a prebuilt version of the SDK framework and a simple "game" that demonstrates the basics.
+
+The Matchbook SDK requires two pieces of configuration information from you.  The first is the URL of the API server to use (if you do not provide one, the SDK will default to 'http://localhost:8080/ap/').   So you'll need to find or set up a running Matchbook server instance.
+
+Once you have that, there are a couple of different ways to tell the Matchbook SDK what server to use.  The first is to simply put the URL into your application's 'Info.plist' file, under the 'au.com.suncoastpc.matchbook.server' key.  This should be a String value, which contains the full server URL and context-path (so a leading 'http(s)://', and a trailing '/ap/' should be included).
+
+The second method is to simply pass the desired server URL as a parameter when you create your 'SCMatchmaker' instance.  More on that later.
+
+The other piece of information required by the Matchbook SDK is the private/API key to use for your application.  You can get this by registering your application id/bundle-identifier on the Matchbook server that you plan on using.  You should register your app's bundle-id exactly as it appears in Xcode/iTunes Connect/etc..  When you do so the Matchbook server will give you an API key, which you can pass to the 'SCMatchmaker' when you instantiate it.  
+
+Once you have those things, creating/joining a match is as simple as setting up a fresh 'SCMatchmaker' instance and asking it to join the next available match:
+
+```objc
+- (void) setupMatch {
+    matchmaker = [[SCMatchmaker alloc] initWithKey:MATCHMAKER_KEY andDelegate:self];    //XXX:  uses server URL contained in Info plist
+    //matchmaker = [[SCMatchmaker alloc] initWithKey:MATCHMAKER_KEY andServerAddress:@"http://127.0.0.1:8080/ap/" andDelegate:self];    //XXX:  explicit server URL
+    match = [[matchmaker autoJoinMatchWithMaxPlayers:NUM_PLAYERS creatingIfNecessary:YES] retain];
+    
+    if (match) {
+        //congrats, you've got a match!
+    }
+    else {
+        //oops, couldn't join the match; probably your server is down or you used the wrong API key, check the log for details
+    }
+}
+```
+
+Note that this example shows both methods for specifying the server URL.  The first call will use the URL contained in your app's 'Info.plist'.  The second will use the server URL that is passed into the constructor.  
+
+Also note that the 'SCMatchmaker' expects to receive an object that conforms to the 'SCMatchmakerDelegate' protocol.  This protocol includes the following methods:
+
+```objc
+- (BOOL)shouldAcceptJoinFromPlayerWithId:(NSString*)playerId andDetails:(NSDictionary*)playerData;
+- (void)receivedData: (NSDictionary*)data fromPlayerWithId:(NSString*)playerId;
+- (void)playerJoinedWithId:(NSString*)playerId andDetails:(NSDictionary*)playerData;
+- (void)playerLeft:(NSString*)playerId;
+- (NSDictionary*) localPlayerDetails;
+```
+
+The most important of these delegate methods is 'receivedData:fromPlayerWithId:'.  This method is invoked whenever a packet is received from another player in the match.  When this happens, you'll most likely want to inspect the contents of the packet, take some actions, and possibly respond by sending a fresh packet from the local device.  For instance:
+
+```objc
+//handles the various messages that we can recieve from our "game"
+- (void)receivedData: (NSDictionary*)data fromPlayerWithId:(NSString*)playerId {
+    //handling messages from players
+    if ([[data objectForKey:@"message"] isEqual:@"PING!"]) {
+        //ooh look, somebody pinged us
+        [self performSelectorOnMainThread:@selector(respondToPing) withObject:nil waitUntilDone:YES];
+    }
+    else if ([[data objectForKey:@"message"] isEqual:@"increment"]) {
+        //increment our shared game counter and update the UI
+        @synchronized(countLabel) {
+            counter++;
+            [self performSelectorOnMainThread:@selector(updateCounter) withObject:nil waitUntilDone:YES];
+        }
+    }
+    else {
+        //the player's background color must have updated (only other message that we expect)
+        NSMutableDictionary* params = [NSMutableDictionary dictionary];
+        [params setObject:[data objectForKey:@"color"] forKey:@"color"];
+        [params setObject:playerId forKey:@"player"];
+        [self performSelectorOnMainThread:@selector(updateLabel:) withObject:params waitUntilDone:NO];
+    }
+}
+```
+
+Obviously that's a fairly contrived example, but you get the idea.  What goes into the packets that get sent around and how your app responds to them is entirely up to you.  The packets themselves are sent between players by way of the 'SCMatch' instance that the 'SCMatchmaker' returned when you called 'autoJoinMatchWithMaxPlayers:creatingIfNecessary'.  The main API methods of interest here are:
+
+```objc
+- (void) broadcastMessage:(NSDictionary*)message;
+- (void) sendMessage:(NSDictionary*)message toPlayer:(NSString*)playerId;
+```
+
+The difference between these two methods should be fairly self-explanatory.  The former broadcasts a message to all players in the game.  The latter sends a message directly to a specific player, and does not notify anyone else who is in the match.  
+
+That covers the basics, though to get a better feel for the complete Matchbook SDK you should read through the other methods contained in the example project's 'ViewController.m' class.  And also through the SDK code/headers as well.
+
 
 ### Getting Started - Android
 
@@ -41,13 +175,14 @@ For the sake of simplicity, you may consider all matchbook code to be licensed u
 - [x] Import code
 - [x] About
 - [x] Screenshot(s)/Photo(s)
-- [ ] Server overview/setup
-- [ ] iOS overview/setup
+- [x] Server overview/setup
+- [x] iOS overview/setup
 - [ ] Android overview/setup
 - [ ] Protocol discussion
 - [ ] FAQ
 - - What matchbook is not (social network, achievements platform, skills-based matchmaker, etc.).
 - - Android SDK (just use the Java SDK, plus the AndroidMatchmaker class from the example project)
 - - Lack of server UI styles
-- - Comms protocol (gzipped json; link to wiki)
+- - Comms protocol (RLE json; link to wiki)
+- - Two SDK version (ARC/non)
 
