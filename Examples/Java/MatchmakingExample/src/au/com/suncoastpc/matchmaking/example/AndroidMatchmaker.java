@@ -38,7 +38,12 @@ public class AndroidMatchmaker extends Matchmaker {
 	 * @param client the client to notify about match-related events, may not be null.  
 	 */
 	public AndroidMatchmaker(TelephonyManager tm, String app, String secret, MatchmakerClient client) {
-		super(null, app, secret, client, SERVER_ADDRESS);
+		super(null, app, secret, client, "".equals(System.getProperty("au.com.suncoastpc.matchbook.server", "")) ? SERVER_ADDRESS : System.getProperty("au.com.suncoastpc.matchbook.server"));
+		this.tm = tm;
+	}
+	
+	public AndroidMatchmaker(TelephonyManager tm, String app, String secret, String serverAddress, MatchmakerClient client) {
+		super(null, app, secret, client, serverAddress);
 		this.tm = tm;
 	}
 	
