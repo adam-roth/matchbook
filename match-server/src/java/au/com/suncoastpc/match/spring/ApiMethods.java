@@ -12,6 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 import org.apache.log4j.Logger;
 import org.springframework.web.servlet.ModelAndView;
 
+import au.com.suncoastpc.auth.annotations.LogsServiceTime;
 import au.com.suncoastpc.auth.db.DatabaseUtil;
 import au.com.suncoastpc.auth.db.MatchExpirationThread;
 import au.com.suncoastpc.auth.spring.base.BaseMethods;
@@ -24,6 +25,7 @@ import au.com.suncoastpc.match.db.MatchRequest;
 import au.com.suncoastpc.match.db.MatchRequestDAO;
 
 //FIXME:  need a thread that times out inactive matches periodically
+@LogsServiceTime
 public class ApiMethods extends BaseMethods {
 	static final Logger LOG = Logger.getLogger(ApiMethods.class);
 	
