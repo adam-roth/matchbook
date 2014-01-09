@@ -300,11 +300,6 @@ Or to put it another way, if you take the Java SDK and add the 'AndroidMatchmake
 **_Why are there two versions of the iOS SDK?_**<br />
 Because while the SDK compiles into a universal iOS framework that can be dropped into any iOS project and used just like any other framework, some developers will invariably prefer just dropping in the source code instead.  And since you can't drop non-ARC source code into an ARC project (and vice-versa), it's necessary to have an ARC and a non-ARC version of the iOS SDK to properly support this use-case.
 
-**_Why is the server interface so ugly?_**<br />
-It's not ugly, it's _completely unstyled_.  The reason being that the only purpose the server-side UI really serves is the allocation of API keys.  That's literally the only important thing it does.  So giving it some pretty styling is very low priority compared to other tasks.
-
-That said, if you'd like to create a decent looking set of initial styles and submit a pull request, feel free.
-
 **_What does the example game do?_**<br />
 A couple of things:
 
@@ -321,6 +316,13 @@ Note that the screen colors displayed as the app starts up provide an indication
 * **Any other color** - your match is running; you should see the shared counter displayed on your device (tap anywhere on the screen to increment it).
 
 The "server player" is the _first_ player to join the match.  They are the host.  If the server player disconnects, so does everyone else.
+
+**_Why is the server interface so ugly?_**<br />
+It's not ugly, it's _completely unstyled_.  The reason being that the only purpose the server-side UI really serves is the allocation of API keys.  That's literally the only important thing it does.  So giving it some pretty styling is very low priority compared to other tasks.
+
+That said, if you'd like to create a decent looking set of initial styles and submit a pull request, feel free.
+
+
 
 ### License
 
