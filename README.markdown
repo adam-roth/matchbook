@@ -33,7 +33,7 @@ Please see the [iOS Walkthrough](https://github.com/adam-roth/matchbook/wiki/iOS
 
 ### Getting Started - Android
 
-Please see the [Android Walkthrough](https://github.com/adam-roth/matchbook/wiki/Android-Walkthrough) for information on using the matchbook SDK in an iOS application.
+Please see the [Android Walkthrough](https://github.com/adam-roth/matchbook/wiki/Android-Walkthrough) for information on using the matchbook SDK in an Android application.
 
 
 ### FAQ
