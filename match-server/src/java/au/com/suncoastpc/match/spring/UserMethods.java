@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.web.servlet.ModelAndView;
 
+import au.com.suncoastpc.auth.annotations.LogsServiceTime;
 import au.com.suncoastpc.auth.annotations.RequiresLogin;
 import au.com.suncoastpc.auth.annotations.RequiresParameters;
 import au.com.suncoastpc.auth.db.DatabaseUtil;
@@ -18,6 +19,7 @@ import au.com.suncoastpc.auth.util.AccessUtils;
 import au.com.suncoastpc.match.db.Game;
 import au.com.suncoastpc.match.db.GameDAO;
 
+@LogsServiceTime
 @RequiresLogin
 public class UserMethods extends BaseMethods {
 	//private static final Logger LOG = Logger.getLogger(UserMethods.class);
