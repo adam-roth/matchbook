@@ -161,11 +161,130 @@ That covers the basics, though to get a better feel for the complete Matchbook S
 
 ### Getting Started - Android
 
+The simplest way to get started is to grab the Android example application, located under '/Examples/Java/MatchmakingExample'.  This project includes everything you need to familiarize yourself with the Matchbook Android SDK, including a prebuilt version of the SDK library and a simple "game" that demonstrates the basics.
+
+The Matchbook SDK requires two pieces of configuration information from you.  The first is the URL of the API server to use (if you do not provide one, the SDK will default to 'http://localhost:8080/ap/').   So you'll need to find or set up a running Matchbook server instance.
+
+Once you have that, there are a couple of different ways to tell the Matchbook SDK what server to use.  The first is to simply expose the URL as a system property, keyed under the 'au.com.suncoastpc.matchbook.server'.  This should be a String value, which contains the full server URL and context-path (so a leading 'http(s)://', and a trailing '/ap/' should be included).
+
+The second method is to simply pass the desired server URL as a parameter when you create your 'Matchmaker' instance.  More on that later.
+
+The other piece of information required by the Matchbook SDK is the private/API key to use for your application.  You can get this by registering your application id on the Matchbook server that you plan on using.  With Android you have a bit more flexibility, in that the SDK allows you to pass in any arbitrary application id you like and does not automatically determine the id from the runtime environment.  Note that if you have both an iOS and an Android app and you want them to be able to talk to each other, you should register your iOS application's bundle-id, and use that same identifier (and API key) for your Android app.
+
+In any event, when you register your application identifier the Matchbook server will give you an API key, which you can pass to the 'Matchmaker' when you instantiate it. 
+
+Once you have those things, creating/joining a match is as simple as setting up a fresh 'Matchmaker' instance and asking it to join the next available match:
+
+```java
+TelephonyManager manager = (TelephonyManager) getBaseContext().getSystemService(Context.TELEPHONY_SERVICE);
+matchmaker = new AndroidMatchmaker(manager, APP_ID, API_KEY, this);  //XXX:  will use the server-address defined in AndroidMatchmaker.java, or the system-property value, if set
+//matchmaker = new AndroidMatchmaker(manager, APP_ID, API_KEY, "http://localhost:8080/ap/" this);  //XXX:  will use the provided server URL
+
+match = matchmaker.autoJoinMatch(NUM_PLAYERS, true);
+if (match != null) {
+    //congrats, you've got a match!
+}
+else {
+    //oops, couldn't join the match; probably your server is down or you used the wrong API key, check the log for details
+}
+```
+
+Note that the Android example project provides an Android-specific Matchmaker subclass (appropriately named 'AndroidMatchmaker'), which is what we use above.  Passing in the 'TelephonyManager' instance is optional, but recommended. 
+
+Also note that the 'Matchmaker' expects to receive an object that implements the 'MatchmakerClient' interface.  This interface includes the following methods:
+
+```java
+   /**
+	 * Asks the client whether or not the given player should be permitted to join the game.
+	 * 
+	 * @param uuid the unique-identifier of the connecting player.
+	 * @param playerData any additional data that the connecting player sent as part of their connection attempt.
+	 * @return true if the player should be allowed to connect
+	 *         false if the player should be rejected
+	 */
+	public boolean shouldAcceptJoinFromPlayer(String uuid, JSONObject playerData);
+	
+	/**
+	 * Informs the client that the given player has joined the game.  
+	 * 
+	 * @param uuid the unique-identifier of the player that joined.
+	 * @param playerData any additional data that the connecting player sent as part of their connection attempt.
+	 */
+	public void playerJoined(String uuid, JSONObject playerData);
+	
+	/**
+	 * Informs the client that the given player has left the game.
+	 * 
+	 * @param uuid the unique-identifier of the player that joined.
+	 */
+	public void playerLeft(String uuid);
+	
+	/**
+	 * Notifies the client that data was received from the given player.
+	 * 
+	 * @param uuid the player that sent the data. 
+	 * @param data the data that was sent.
+	 */
+	public void dataReceivedFromPlayer(String uuid, JSONObject data);
+	
+	/**
+	 * Implement this method to return a custom JSONObject containing extended information about the local player.  
+	 * The information returned from this method will be exchanged between clients whenever a new connection is made, 
+	 * and will be sent to the shouldAcceptJoinFromPlayer() and playerJoined() callbacks when new players join the 
+	 * match (if the current player is acting as the host).
+	 * 
+	 * If you do not wish to pass around any custom/extended information about the local player, then simply return 
+	 * null from this method.
+	 * 
+	 * @return
+	 */
+	public JSONObject getPlayerDetails();
+```
+
+The most important of these methods is 'dataReceivedFromPlayer(String uuid, JSONObject data)'.  This method is invoked whenever a packet is received from another player in the match.  When this happens, you'll most likely want to inspect the contents of the packet, take some actions, and possibly respond by sending a fresh packet from the local device.  For instance:
+
+```java
+    @Override
+    //handles the various messages that we can recieve from our "game"
+	public void dataReceivedFromPlayer(String playerId, JSONObject data) {
+		//handling messages from players
+		if ("PING!".equals(data.get("message"))) {
+		    //ooh look, somebody pinged us
+			this.respondToPing(playerId);
+		}
+		else if ("increment".equals(data.get("message"))) {
+		    //increment our shared game counter and update the UI
+			synchronized(countView) {
+				counter++;
+				this.updateCounter();
+			}
+		}
+		else {
+		    //the player's background color must have updated (only other message that we expect)
+			Long color = (Long)data.get("color");
+			this.updateLabelForPlayer(playerId, color);
+		}
+	}
+```
+
+Obviously that's a fairly contrived example, but you get the idea.  What goes into the packets that get sent around and how your app responds to them is entirely up to you.  The packets themselves are sent between players by way of the 'Match' instance that the 'Matchmaker' returned when you called 'autoJoinMatch()'.  The main API methods of interest here are:
+
+```java
+    public synchronized void broadcastMessage(JSONObject message);
+	public synchronized void sendMessageToPlayer(JSONObject message, String playerUuid);
+```
+
+The difference between these two methods should be fairly self-explanatory.  The former broadcasts a message to all players in the game.  The latter sends a message directly to a specific player, and does not notify anyone else who is in the match.  
+
+That covers the basics, though to get a better feel for the complete Matchbook SDK you should read through the other methods contained in the example project's 'MatchmakingExampleActivity' class.  And also through the SDK code/javadoc as well.
+
 ### FAQ
 
 ### License
 
-I'm of the opinion that when someone takes something valuable, like source code, and knowingly and willingly puts it somewhere where literally anyone in the world can view it and grab a copy for themselves, as I have done, they are giving their implicit consent for those people to do so and to use the code however they see fit.  I think the concept of "copyleft" is, quite frankly, borderline insane.  Information wants to be free without reservation, and good things happen when we allow it to be.  But not everyone agrees with that philosophy, and larger organizations like seeing an "official" license, so I digress.
+I'm of the opinion that when someone takes something valuable, like source code, and knowingly and willingly puts it somewhere where literally anyone in the world can view it and grab a copy for themselves, as I have done, they are giving their implicit consent for those people to do so and to use the code however they see fit.  I think the concept of "copyleft" is, quite frankly, borderline insane.  
+
+Information wants to be free without reservation, and good things happen when we allow it to be.  But not everyone agrees with that philosophy, and larger organizations like seeing an "official" license, so I digress.
 
 For the sake of simplicity, you may consider all matchbook code to be licensed under the terms of the MIT license.  Or if you prefer, the Apache license.  Or CC BY.  Or any other permissive open-source license (the operative word there being "permissive").  Take your pick.  Basically use this code if you like, otherwise don't.  Though if you use matchbook to build something cool that changes the world, please remember to give credit where credit is due.  And also please tell me about it, so that I can see too.  
 
@@ -177,7 +296,7 @@ For the sake of simplicity, you may consider all matchbook code to be licensed u
 - [x] Screenshot(s)/Photo(s)
 - [x] Server overview/setup
 - [x] iOS overview/setup
-- [ ] Android overview/setup
+- [x] Android overview/setup
 - [ ] Protocol discussion
 - [ ] FAQ
 - - What matchbook is not (social network, achievements platform, skills-based matchmaker, etc.).
@@ -185,4 +304,5 @@ For the sake of simplicity, you may consider all matchbook code to be licensed u
 - - Lack of server UI styles
 - - Comms protocol (RLE json; link to wiki)
 - - Two SDK version (ARC/non)
+- - Example game
 
