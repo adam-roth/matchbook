@@ -15,6 +15,7 @@ import javax.servlet.http.HttpServletResponse;
 import org.apache.log4j.Logger;
 import org.springframework.web.servlet.ModelAndView;
 
+import au.com.suncoastpc.auth.annotations.LogsServiceTime;
 import au.com.suncoastpc.auth.annotations.RequiresTrustLevel;
 import au.com.suncoastpc.auth.db.DatabaseUtil;
 import au.com.suncoastpc.auth.db.User;
@@ -22,6 +23,7 @@ import au.com.suncoastpc.auth.spring.base.BaseMethods;
 import au.com.suncoastpc.auth.util.Configuration;
 import au.com.suncoastpc.auth.util.Constants;
 
+@LogsServiceTime
 @RequiresTrustLevel(minimumTrust = Constants.TRUST_LEVEL_ADMIN)  //admin access only
 public class AdminMethods extends BaseMethods {
 	private static final Logger LOG = Logger.getLogger(AdminMethods.class);
