@@ -13,6 +13,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import au.com.suncoastpc.auth.annotations.BypassesQuarantine;
 import au.com.suncoastpc.auth.annotations.ForbidsLogin;
+import au.com.suncoastpc.auth.annotations.LogsServiceTime;
 import au.com.suncoastpc.auth.annotations.PostEnforceConditionsIfValidSession;
 import au.com.suncoastpc.auth.db.DatabaseUtil;
 import au.com.suncoastpc.auth.db.User;
@@ -29,6 +30,7 @@ import au.com.suncoastpc.auth.util.types.UserState;
  * 
  * @author Adam
  */
+@LogsServiceTime
 public class AuthMethods extends BaseMethods {
 	private static final Logger LOG = Logger.getLogger(AuthMethods.class);
 	
