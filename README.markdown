@@ -59,7 +59,7 @@ Or to put it another way, if you take the Java SDK and add the 'AndroidMatchmake
 Because while the SDK compiles into a universal iOS framework that can be dropped into any iOS project and used just like any other framework, some developers will invariably prefer just dropping in the source code instead.  And since you can't drop non-ARC source code into an ARC project (and vice-versa), it's necessary to have an ARC and a non-ARC version of the iOS SDK to properly support this use-case.
 
 **_What communications protocol is used behind the scenes?_**<br />
-Behind the scenes clients communicate using a very simple "run-length encoded JSON" protocol.  Basially the pass JSON-formatted "packets" to each other, with each packet preceded by a 32-bit integer that specifies the length of the incoming JSON data.  It's not strictly necessary to send the size of the JSON data like that (streaming JSON parsers, etc., etc.), but doing so makes a number of things both easier, and more secure.
+Behind the scenes clients communicate using a very simple "run-length encoded JSON" protocol.  Basially they pass JSON-formatted "packets" to each other, with each packet preceded by a 32-bit integer that specifies the length of the incoming JSON data.  It's not strictly necessary to send the size of the JSON data like that (streaming JSON parsers, etc., etc.), but doing so makes a number of things both easier, and more secure.
 
 **_What does the example game do?_**<br />
 A couple of things:
