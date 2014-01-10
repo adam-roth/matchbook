@@ -9,7 +9,7 @@
 	<body>
 		<div class="mainContent">
 			<div class="userStats">
-				Login successful, you are [id=${user.id}, email=${user.email}, hashedPassword=${user.hashedPassword}, salt=${user.salt}]!
+				Login successful, you are [id=${user.id}, email=${user.email}]!
 			</div>
 			<div class="gameList">
 				<c:forEach var="game" items="${user.games}">
